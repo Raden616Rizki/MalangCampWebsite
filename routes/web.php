@@ -4,9 +4,6 @@ use App\Http\Controllers\KeranjangController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaketController;
-use Illuminate\Http\Request; 
-use Illuminate\Http\Request;
-use App\Http\Controllers\DataController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\KelolaBarangController;
 use App\Http\Controllers\updateUserController;
@@ -63,7 +60,7 @@ Route::get('/updatePaket', function () {
     return view('updatePaket');
 });
 
-Route::get('/cart', [App\Http\Controllers\CartController::class, 'show'])->name('cart');
+// Route::get('/cart', [App\Http\Controllers\CartController::class, 'show'])->name('cart');
 
 Route::get('/kelolaPesanan', [App\Http\Controllers\PesananController::class, 'show'])->name('kelolaPesanan');
 
@@ -95,10 +92,23 @@ Route::get('/otp', [OTPController::class, 'show'])->name('verification-get');
 Route::post('/otp', [OTPController::class, 'verify'])->name('verification-post');
 
 Route::post('/cart/add',[KeranjangController::class, 'addToCart'])->name('cart.add');
-Route::get('/show-cart', [KeranjangController::class,'showCart'])->name('cart.show');
+Route::get('/cart', [KeranjangController::class,'showCart'])->name('cart.show');
 Route::get('/test-cart', function (){
-    return view('product');
+    return view('tes.product');
 });
 
 Route::get('/update-account', [updateUserController::class, 'edit'])->name('get-account');
 Route::post('/post-account', [updateUserController::class, 'update'])->name('post-account');
+
+//coba routes cart
+Route::get('/tambahPesanan', [KeranjangController::class,'index'])->name('index');
+
+Route::get('cart', [KeranjangController::class,'cart'])->name('cart');
+
+Route::get('cartt', [KeranjangController::class,'cart'])->name('cartt');
+
+Route::get('add-to-cart/{id}', [KeranjangController::class,'addToCart'])->name('addToCart');
+
+Route::patch('update-cart', [KeranjangController::class,'update'])->name('update');
+
+Route::delete('remove-from-cart', [KeranjangController::class,'remove'])->name('remove');

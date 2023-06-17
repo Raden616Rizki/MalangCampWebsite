@@ -353,7 +353,7 @@
             margin-right: 3vh;
             margin-left: 3vh;
             margin-top: 1vh;
-            
+
         }
 
         .content-right-box-cart{
@@ -607,6 +607,7 @@
             text-align: center;
             font-size: 15px;
             box-shadow: 6px 0px 10px rgba(0, 0, 0, 0.25);
+            color: white;
         }
 
         .box_list {
@@ -628,15 +629,11 @@
 
         .box_listTam{
             position: relative;
-            width: 97%;
-            height: 380px;
-            left: 2%;
-            right: 2%;
-            top: 35px;
+            width: 100%;
             background: #96858F;
             box-shadow: 6px 0px 10px rgba(0, 0, 0, 0.25);
             border-radius: 30px;
-            justify-content:center;
+            padding:5%;
         }
 
         label {
@@ -667,7 +664,7 @@
             position:relative;
             margin-left:11.5%
         }
-        
+
         .box_panah{
             position: relative;
             width: 40%;
@@ -686,7 +683,9 @@
             left:20%;
         }
 
-        .hapus_edit {}
+        .hapus_edit {
+
+        }
 
         .tenda {
             margin-left: 5%;

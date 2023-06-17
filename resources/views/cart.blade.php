@@ -7,12 +7,29 @@
                 <div class="content-cart" style="display:flex; width:100%; height:100%">
                     <div class="left-box-cart">
                         <div class="content-left-box-cart">
-                            <form action="" method="POST" enctype="">
-                                @csrf
-                                <div class="cart-input" placeholder="">
-                                    <input type="text">
-                                </div>
-                            </form>
+                            @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                    
+                        @if(count($cart) > 0)
+                            <table class="table">
+                                <tbody>
+                                    @foreach($cart as $productId => $quantity)
+                                    @if(isset($products[$productId]))
+                                        <tr>
+                                            <td class="cart-input">{{ $products[$productId]->nama_item }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                                </tbody>
+                            </table>    
+                            <!-- Tambahkan tombol untuk menghapus atau mengupdate produk di keranjang -->
+                        @else
+                            <p>Keranjang belanja kosong.</p>
+                        @endif
+                    
                         </div>
                     </div>
                     <div class="right-box-cart">
