@@ -11,6 +11,8 @@ class kelolaBarangs extends Model
 
     protected $table = 'kelola_barangs';
 
+    protected $primaryKey = 'id_item';
+
     public function KelolaPesanan(){
         return $this->belongsToMany(KelolaPesanan::class, "items_pesanan", "pesanan_id", "id_item");
     }

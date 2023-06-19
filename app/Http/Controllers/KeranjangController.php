@@ -20,37 +20,37 @@ class KeranjangController extends Controller
     }
 
     // this function is to show cart of product because we wanna show result of choose product by user in this page
-    public function cart()  
+    public function cart()
     {
-        return view('cart');  
+        return view('cart');
     }
 
-    
 
-    public function addToCart($id) // by this function we add product of choose in card
+
+    public function addToCart($id_item) // by this function we add product of choose in card
     {
-        $product = kelolaBarangs::find($id);
-   
+        $product = kelolaBarangs::find($id_item);
+
         if(!$product) {
-   
+
             abort(404);
-   
+
         }
    // what is Session:
    //Sessions are used to store information about the user across the requests.
-   // Laravel provides various drivers like file, cookie, apc, array, Memcached, Redis, and database to handle session data. 
+   // Laravel provides various drivers like file, cookie, apc, array, Memcached, Redis, and database to handle session data.
    // so cause write the below code in controller and tis code is fix
-        $cart = session()->get('cart');  
-   
+        $cart = session()->get('cart');
+
         // if cart is empty then this the first product
         if(!$cart) {
-   
+
             $cart = [
-                    $id => [
-                        "name" => $product->name,
+                    $id_item => [
+                        "nama_item" => $product->nama_item,
                         "quantity" => 1,
-                        "price" => $product->price,
-                        "photo" => $product->photo
+                        "harga" => $product->harga,
+                        "gambar" => $product->gambar
                     ]
             ];
 
@@ -60,9 +60,9 @@ class KeranjangController extends Controller
         }
 
         // if cart not empty then check if this product exist then increment quantity
-        if(isset($cart[$id])) {
+        if(isset($cart[$id_item])) {
 
-            $cart[$id]['quantity']++;
+            $cart[$id_item]['quantity']++;
 
             session()->put('cart', $cart); // this code put product of choose in cart
 
@@ -71,7 +71,7 @@ class KeranjangController extends Controller
         }
 
         // if item not exist in cart then add to cart with quantity = 1
-        $cart[$id] = [
+        $cart[$id_item] = [
             "nama_item" => $product->nama_item,
             "quantity" => 1,
             "harga" => $product->harga,
@@ -87,28 +87,28 @@ class KeranjangController extends Controller
     // update product of choose in cart
     public function update(Request $request)
     {
-        if($request->id and $request->quantity)
+        if($request->id_item and $request->quantity)
         {
             $cart = session()->get('cart');
-   
-            $cart[$request->id]["quantity"] = $request->quantity;
-   
+
+            $cart[$request->id_item]["quantity"] = $request->quantity;
+
             session()->put('cart', $cart);
-   
+
             session()->flash('success', 'Cart updated successfully');
         }
     }
-   
+
     // delete or remove product of choose in cart
     public function remove(Request $request)
     {
-        if($request->id) {
+        if($request->id_item) {
 
             $cart = session()->get('cart');
 
-            if(isset($cart[$request->id])) {
+            if(isset($cart[$request->id_item])) {
 
-                unset($cart[$request->id]);
+                unset($cart[$request->id_item]);
 
                 session()->put('cart', $cart);
             }
@@ -116,7 +116,7 @@ class KeranjangController extends Controller
             session()->flash('success', 'Product removed successfully');
         }
     }
-    
+
 
 
 

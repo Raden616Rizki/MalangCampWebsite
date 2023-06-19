@@ -6,7 +6,6 @@
 <div class="utama">
     <!-- <div class="box_kelola"> -->
     <div class="box_listTam">
-        <div class="">
             <div class="box-item" style="display: grid;
             grid-template-columns: repeat(3, 1fr);">
                 @foreach($products as $product)
@@ -43,7 +42,6 @@
                         </li>
                     </ul>
                 </div>
-        </div>
     </div>
 </div>
 <!-- </div> -->

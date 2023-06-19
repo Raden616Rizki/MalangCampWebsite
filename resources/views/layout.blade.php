@@ -50,6 +50,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+
     <style>
 
         body{
@@ -339,7 +344,26 @@
             margin-top: 1vh;
             margin-right: 3vh;
             margin-left: 3vh;
+        }
 
+        .show-item-cart{
+            width: 100%;
+            height: 6vh;
+            background: #FFFFFF;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 18px;
+            border: none;
+            margin-top: 3vh;
+        }
+
+        .show-item-cart tr td input{
+            background-color: transparent;
+            border: none;
+            font-family: 'Inter';
+            font-style: normal;
+            display: flex;
+            color: #000000;
+            margin-left: 3vh;
         }
 
         .cart-pesanan .content-cart .right-box-cart{
@@ -946,6 +970,11 @@
             text-decoration: underline;
         }
 
+        .session{
+    visibility:hidden ;
+    
+}
+
 
     </style>
 
@@ -1011,7 +1040,7 @@
                 enabled = false;
             }
         }
-    </script>
+    </script>    
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -1135,6 +1164,13 @@
                 <div class="container-fluid">
                     @yield('content')
                 </div>
+
+                @yield('scripts')
+
+                <script>
+               $("a").click(function () {
+                     $(".session").visibility(2);});
+                   </script>
                 <!-- /.container-fluid -->
             </section>
             <footer class="text-center mt-8">

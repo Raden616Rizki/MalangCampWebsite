@@ -7,40 +7,30 @@
                 <div class="content-cart" style="display:flex; width:100%; height:100%">
                     <div class="left-box-cart">
                         <div class="content-left-box-cart">
-                            @if(session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                    
-                        @if(count($cart) > 0)
-                            <table class="table">
-                                <tbody>
-                                    @foreach($cart as $productId => $quantity)
-                                    @if(isset($products[$productId]))
+                            <?php $total = 0 ?>
+                            @if (session('cart'))
+                                @foreach (session('cart') as $id_item => $details)
+                                <?php $total += $details['harga'] * $details['quantity'] ?>
+                                    <table class="show-item-cart">
                                         <tr>
-                                            <td class="cart-input">{{ $products[$productId]->nama_item }}</td>
+                                            <td><input type="text" value="{{ $details['nama_item'] }}" disabled></td>
+                                            <td><input type="number" value="{{ $details['quantity'] }}" class="form-control quantity" style="width: 9vh" /></td>
+                                            <td><button type="submit" class="btn btn-danger btn-sm remove-from-cart delete" data-id="{{ $id_item }}"><i class="fa fa-trash-o"></i>X</button></td>
                                         </tr>
-                                    @endif
+                                    </table>
                                 @endforeach
-                                </tbody>
-                            </table>    
-                            <!-- Tambahkan tombol untuk menghapus atau mengupdate produk di keranjang -->
-                        @else
-                            <p>Keranjang belanja kosong.</p>
-                        @endif
-                    
+                            @endif
                         </div>
                     </div>
                     <div class="right-box-cart">
                         <div class="content-right-box-cart" >
                             <form method="POST" action="" enctype="multipart/form-data">
                                 @csrf
-                                <div class="cart-input" placeholder="">
-                                    <input type="text">
+                                <div class="cart-input">
+                                    <input type="text" value=" Rp {{$total}}" disabled>
                                 </div>
-                                <div class="cart-input" placeholder="">
-                                    <input type="text">
+                                <div class="cart-input">
+                                    <input type="text" value="1150396230" disabled>
                                 </div>
                                 <div class="tanggal-pinjam" style="padding-top: 3vh;">
                                     <label style="color:black; font-family: 'Inter'; font-style: normal;">Tanggal Pinjamanan</label><br>
@@ -75,4 +65,44 @@
                 </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+
+
+    <script type="text/javascript">
+// this function is for update card
+        $(".update-cart").click(function (e) {
+            e.preventDefault();
+
+           var ele = $(this);
+
+            $.ajax({
+               url: '{{ url('update-cart') }}',
+               method: "patch",
+               data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("tr").find(".quantity").val()},
+               success: function (response) {
+                    window.location.reload();
+               }
+            });
+        });
+
+        $(".remove-from-cart").click(function (e) {
+            e.preventDefault();
+
+            var ele = $(this);
+
+            if(confirm("Are you sure")) {
+                $.ajax({
+                    url: '{{ url('remove-from-cart') }}',
+                    method: "DELETE",
+                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
+                    success: function (response) {
+                        window.location.reload();
+                        
+                    }
+                });
+            }
+        });
+
+    </script>
 @endsection
