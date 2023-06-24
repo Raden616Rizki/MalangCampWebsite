@@ -23,27 +23,30 @@
                         </div>
                     </div>
                     <div class="right-box-cart">
-                        <div class="content-right-box-cart" >
-                            <form method="POST" action="" enctype="multipart/form-data">
+                        <div class="content-right-box-cart">
+                            <form method="POST" action="{{route('keranjang.store')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="cart-input">
-                                    <input type="text" value=" Rp {{$total}}" disabled>
+                                    <input type="text" name="total" id="total" value=" Rp {{$total}}" style="padding:2vh;font-family: 'Inter';
+                                    font-style: normal;" disabled>
+                                    <input type="hidden" name="total" value="{{$total}}">
                                 </div>
                                 <div class="cart-input">
-                                    <input type="text" value="1150396230" disabled>
+                                    <input type="text" value="1150396230" style="padding:2vh; font-family: 'Inter';
+                                    font-style: normal;" disabled>
                                 </div>
-                                <div class="tanggal-pinjam" style="padding-top: 3vh;">
+                                <div class="tanggal-pinjam" name="tanggal_peminjaman" id="tanggal_peminjaman" style="padding-top: 3vh;">
                                     <label style="color:black; font-family: 'Inter'; font-style: normal;">Tanggal Pinjamanan</label><br>
-                                    <input type="date" name="tanggal-pinjam" style="width: 100%; height: 6vh; border-radius:4px; background: #FFFFFF;
+                                    <input type="date" name="tanggal_pinjam" style="width: 100%; height: 6vh; border-radius:4px; background: #FFFFFF;
                                     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border:none;">
                                 </div>
-                                <div class="tanggal-kembali" style="padding-top: 3vh; padding-bottom: 3vh;">
+                                <div class="tanggal-kembali" name="tanggal_kembali" id="tanggal_kembali" style="padding-top: 3vh; padding-bottom: 3vh;">
                                     <label style="color:black; font-family: 'Inter'; font-style: normal;">Tanggal Kembali</label><br>
-                                    <input type="date" name="tanggal-kembali" style="width: 100%; height: 6vh; border-radius:4px; background: #CFCFCF;
+                                    <input type="date" name="tanggal_kembali" style="width: 100%; height: 6vh; border-radius:4px; background: #CFCFCF;
                                     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border:none;">
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFileLang" lang="in" onchange="previewImage(event)">
+                                    <input type="file" name="bukti_transaksi" id="bukti_transaksi" class="custom-file-input" id="customFileLang" lang="in" onchange="previewImage(event)">
                                     <label class="custom-file-label" for="customFileLang">pilih file </label>
                                 </div>
                                 <div class="preview" style="width:8vh; height:10vh; padding-top: 1vh;">
@@ -51,15 +54,18 @@
                                         <img class="img-bukti" id="preview" src="#" alt="preview">
                                     </div>
                                 </div>
-                                <div class="form-group" style="padding-top:2vh">
-                                    <textarea class="form-control" rows="2" id="comment" placeholder="catatan"></textarea>
+                                <div class="form-group"  style="padding-top:2vh">
+                                    <textarea class="form-control" name="catatan" id="catatan" rows="2" id="comment" placeholder="catatan"></textarea>
                                 </div>
+                                <div class="button-kirim-bukti">
+                                    <button type = "submit" class="custom-button-kirim">
+                                        {{ __('Kirim') }}
+                                    </button>
+                                </div>
+
+
                             </form>
-                            <div class="button-kirim-bukti">
-                                <button class="custom-button-kirim">
-                                    {{ __('Kirim') }}
-                                </button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -98,7 +104,7 @@
                     data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
                     success: function (response) {
                         window.location.reload();
-                        
+
                     }
                 });
             }

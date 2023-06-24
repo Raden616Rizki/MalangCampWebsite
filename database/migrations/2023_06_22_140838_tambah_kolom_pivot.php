@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kelola_barangs_paket', function (Blueprint $table) {
-            $table->id('kelola_barangs_paket_id');
-            $table->unsignedBigInteger('id_item');
-            $table->unsignedBigInteger('paket_id');
-            $table->timestamps();
+        Schema::table('items_pesanan', function (Blueprint $table) {
+            $table->integer('jumlah');
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelola_barangs_pakets');
+        Schema::table('items_pesanan', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -13,7 +13,12 @@ class kelolaBarangs extends Model
 
     protected $primaryKey = 'id_item';
 
-    public function KelolaPesanan(){
-        return $this->belongsToMany(KelolaPesanan::class, "items_pesanan", "pesanan_id", "id_item");
+    public function kelolaPesanan()
+    {
+        return $this->belongsToMany(KelolaPesanan::class, 'items_pesanan', 'id_item', 'pesanan_id');
     }
+
+    // public function Items_Pesanan(){
+    //     return $this->hasMany(Items_Pesanan::class, 'id_item');
+    // }
 }

@@ -20,10 +20,14 @@ class KelolaPesanan extends Model
         'status_pembayaran',
         'catatan',
         'status_order',
-        'total', 
+        'total',
     ];
 
     public function kelolaBarangs(){
         return $this->belongsToMany(kelolaBarangs::class, "items_pesanan", "pesanan_id", "id_item");
     }
+
+    // public function Items_Pesanan(){
+    //     return $this->hasMany(Items_Pesanan::class, 'pesanan_id');
+    // }
 }

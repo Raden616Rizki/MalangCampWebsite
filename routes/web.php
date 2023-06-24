@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\KelolaBarangController;
 use App\Http\Controllers\updateUserController;
 use App\Http\Controllers\TambahPesananController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OTPController;
@@ -112,3 +113,5 @@ Route::get('add-to-cart/{id}', [KeranjangController::class,'addToCart'])->name('
 Route::patch('update-cart', [KeranjangController::class,'update'])->name('update');
 
 Route::delete('remove-from-cart', [KeranjangController::class,'remove'])->name('remove');
+
+Route::resource('keranjang',PesananController::class);

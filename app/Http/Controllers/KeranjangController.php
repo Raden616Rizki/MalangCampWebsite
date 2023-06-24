@@ -14,8 +14,6 @@ class KeranjangController extends Controller
     public function index()  // get all data from database
     {
         $products = kelolaBarangs::paginate(3);
-
-
         return view('tambahPesanan', compact('products'))->with('products', $products);  //  show all data in page of products.blade.php
     }
 
