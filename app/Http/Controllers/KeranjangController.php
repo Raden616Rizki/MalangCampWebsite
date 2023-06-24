@@ -25,7 +25,7 @@ class KeranjangController extends Controller
 
 
 
-    public function addToCart($id_item) // by this function we add product of choose in card
+    public function addToCart($id_item) 
     {
         $product = kelolaBarangs::find($id_item);
 
@@ -34,10 +34,6 @@ class KeranjangController extends Controller
             abort(404);
 
         }
-   // what is Session:
-   //Sessions are used to store information about the user across the requests.
-   // Laravel provides various drivers like file, cookie, apc, array, Memcached, Redis, and database to handle session data.
-   // so cause write the below code in controller and tis code is fix
         $cart = session()->get('cart');
 
         // if cart is empty then this the first product
@@ -62,13 +58,13 @@ class KeranjangController extends Controller
 
             $cart[$id_item]['quantity']++;
 
-            session()->put('cart', $cart); // this code put product of choose in cart
+            session()->put('cart', $cart); 
 
             return redirect()->back()->with('success', 'Product added to cart successfully!');
 
         }
 
-        // if item not exist in cart then add to cart with quantity = 1
+
         $cart[$id_item] = [
             "nama_item" => $product->nama_item,
             "quantity" => 1,
