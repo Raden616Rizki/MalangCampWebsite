@@ -67,10 +67,10 @@ class PesananController extends Controller
         $request->filled('catatan') ? $pesanan->catatan = $request->catatan : null;
         $pesanan->total=$request->get('total');
 
+        $pesanan->save();
         
         $items = kelolaBarangs::find($id_item);
 
-        $pesanan->save();
         
         $pesanan->kelolaBarangs()->attach($items->id_item);
 
