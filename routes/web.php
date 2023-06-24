@@ -4,15 +4,17 @@ use App\Http\Controllers\KeranjangController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaketController;
+use Illuminate\Http\Request;
+use App\Http\Controllers\DataController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\KelolaBarangController;
 use App\Http\Controllers\updateUserController;
 use App\Http\Controllers\TambahPesananController;
 use App\Http\Controllers\PesananController;
-use App\Http\Controllers\DataController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OTPController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaketMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +75,10 @@ Route::get('/tambahPaket', function () {
     return view('tambahPaket');
 });
 
+Route::get('/paketMember', [PaketMemberController::class, 'index']);
+Route::get('/paketMember/{paket_id}', [PaketMemberController::class, 'show']);
+
+
 Route::delete('/data/{id}', [DataController::class, 'destroy'])->name('data.destroy')->middleware('auth');
 
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
@@ -86,6 +92,8 @@ Route::resource('/tambahPesanan', TambahPesananController::class);
 // });
 
 Route::post('register', [RegisterController::class, 'register'])->name('register-otp');
+
+Route::get('/laporanPaket/cetak_pdf', [PaketController::class, 'cetak_pdf'])->name('cetak_laporanPaket');
 
 Route::resource('paket', PaketController::class);
 

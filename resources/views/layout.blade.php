@@ -45,8 +45,8 @@
     {{-- jquery --}}
     <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="{{asset('//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css')}}">
+    <link rel="stylesheet" href="{{asset('/resources/demos/style.css')}}">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
@@ -488,10 +488,11 @@
 
         /* kelola_barangs */
 
-        .utama{
-            height : 50%;
+        .utama {
+            height: 50%;
         }
-        .box_kelola{
+
+        .box_kelola {
             position: relative;
             width: 50%;
             height: 50%;
@@ -504,7 +505,7 @@
             border-radius: 30px;
         }
 
-        .box_kelola1{
+        .box_kelola1 {
             position: relative;
             width: 30%;
             height: 50%;
@@ -531,7 +532,7 @@
             align-items: center;
             text-align: center;
             color: #000000;
-            margin-left:30%;
+            margin-left: 30%;
         }
 
         .box_foto {
@@ -541,7 +542,7 @@
             margin-top: 30px;
             margin-left: 30%;
             margin-right: 28%;
-            margin-bottom:5px;
+            margin-bottom: 5px;
             background-color: rgba(150, 150, 150, 0.75);
             border: 0px solid #ccc;
             border-radius: 10px;
@@ -550,10 +551,10 @@
         }
 
         .drop-container {
-            margin-top : 27px;
-            margin-left : 27px;
-            margin-right : 27px;
-            margin-bottom : 10px;
+            margin-top: 27px;
+            margin-left: 27px;
+            margin-right: 27px;
+            margin-bottom: 10px;
             position: relative;
             display: flex;
             gap: 10px;
@@ -602,7 +603,7 @@
             border-radius: 30px;
         }
 
-        .box_isi{
+        .box_isi {
             /* position: static; */
             width: 94%;
             height: 25px;
@@ -611,11 +612,11 @@
             border: 0px solid #ccc;
             border-radius: 7px;
             color: black;
-            padding-left:5px;
+            padding-left: 5px;
         }
 
-        .isi{
-            padding-top :5px;
+        .isi {
+            padding-top: 5px;
         }
 
         .box_add {
@@ -646,12 +647,12 @@
             border-radius: 30px;
         }
 
-        .list{
-            margin-left:10%;
-            margin-right:10%;
+        .list {
+            margin-left: 10%;
+            margin-right: 10%;
         }
 
-        .box_listTam{
+        .box_listTam {
             position: relative;
             width: 100%;
             background: #96858F;
@@ -661,11 +662,13 @@
         }
 
         label {
-            margin-bottom: 0px; /* Memberikan jarak antara label dengan elemen berikutnya */
+            margin-bottom: 0px;
+            /* Memberikan jarak antara label dengan elemen berikutnya */
         }
-        .pagination{
+
+        .pagination {
             margin-left: 27%;
-            right:0%;
+            right: 0%;
         }
 
         .box_tenda {
@@ -681,30 +684,30 @@
             border-radius: 10px;
             margin-left: 2%;
             margin-right: 2%;
-            padding-right:10%;
+            padding-right: 10%;
         }
 
-        .tambahan{
-            position:relative;
-            margin-left:11.5%
+        .tambahan {
+            position: relative;
+            margin-left: 11.5%
         }
-
+        
         .box_panah{
             position: relative;
             width: 40%;
             height: 35px;
             top: 18px;
-            margin-bottom:9px;
-            text-align:center;
+            margin-bottom: 9px;
+            text-align: center;
             background: #FFFFFF;
             opacity: 0.6;
             border-radius: 10px;
-            padding-top:1%;
+            padding-top: 1%;
             justify-content: center;
         }
 
-        .box_panah_tenda{
-            left:20%;
+        .box_panah_tenda {
+            left: 20%;
         }
 
         .hapus_edit {
@@ -729,7 +732,7 @@
             height: 35px;
             left: 90%;
             top: 60px;
-            text-align:center;
+            text-align: center;
             background: #FFFFFF;
             opacity: 0.6;
             border-radius: 10px;
@@ -954,6 +957,7 @@
             height: 22px;
         }
 
+
         /* header */
         /* a.active {
             background-color: #96858F;
@@ -979,7 +983,11 @@
     </style>
 
     <script>
-        const loginId = {{ Auth::user() -> id}};
+        const loginId = {
+            {
+                Auth::user() - > id
+            }
+        };
         const userProfile = '{{ Auth::user()->photo_profile }}';
 
         let enabled = false;
@@ -1040,7 +1048,7 @@
                 enabled = false;
             }
         }
-    </script>    
+    </script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -1102,26 +1110,37 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
-                <div class="mt-3 pb-3 mb-3 text-center">
+                <div class="mt-3 pb-3 text-center">
                     <div>
-                        <img src="{{asset('storage/'.Auth::user()->photo_profile)}}" class="img-circle elevation-2 photo-profile"
-                            alt="User Image" href="/account">
+
+                        <!-- <img src="{{asset(Auth::user()->photo_profile)}}" class="img-circle elevation-2 photo-profile" alt="User Image" href="/account"> -->
+
+                        <img src="{{asset('storage/'.Auth::user()->photo_profile)}}"
+                            class="img-circle elevation-2 photo-profile" alt="User Image" href="/account">
                         <a href="/account" class="d-block mt-2 text-white">
                             <h6 id="username">{{Auth::user()->name}}</h6>
                         </a>
                     </div>
                     <hr color="white" />
-
                 </div>
 
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
+                <nav>
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        {{-- @foreach ($items as $item)
-                          <a href="{{ route('items.index',$items->id) }}" class="d-block mb-4">{{$item->nama}}</a>
+                        <div style="display: flex; justify-content: space-between;">
+                            <a href="/tambahPesanan" class="d-block mb-3 text-white"> List Barang</a>
+                            <img src="static/image/Expand_right.png">
+                        </div>
                         <hr color="white" />
-                        @endforeach --}}
+                    </ul>
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <div style="display: flex; justify-content: space-between;">
+                            <a href="/paketMember" class="d-block mb-3 text-white"> Paket Barang</a>
+                            <img src="static/image/Expand_right.png">
+                        </div>
+                        <hr color="white" />
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

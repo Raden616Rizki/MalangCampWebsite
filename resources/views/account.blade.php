@@ -50,30 +50,38 @@
                                         <form id="deleteForm" action="/data/{{Auth::user()->id}}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" class="btn btn-outline-light" style="background-color:#AC608D;" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete Account</button>
-                                          </form>
+                                            <button type="button" class="btn btn-outline-light"
+                                                style="background-color:#AC608D;" data-bs-toggle="modal"
+                                                data-bs-target="#confirmDeleteModal">Delete Account</button>
+                                        </form>
 
-                                          {{-- Modal Confirm --}}
-                                          <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                        {{-- Modal Confirm --}}
+                                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1"
+                                            aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus Akun</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi
+                                                            Hapus Akun</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <p>Apakah Anda yakin ingin menghapus akun ini?</p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Hapus</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Batal</button>
+                                                        <button type="button" class="btn btn-danger"
+                                                            id="confirmDeleteButton">Hapus</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <a class="btn btn-outline-light" style="background-color:#673A54;" href="/update-account" type="button">Update Account</a>
+                                        <a class="btn btn-outline-light" style="background-color:#673A54;"
+                                            href="update-account" type="button">Update Account</a>
                                     </td>
                                 </tr>
                             </table>

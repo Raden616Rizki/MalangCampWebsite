@@ -3,6 +3,12 @@
 @section('title', 'Kelola Barang')
 
 @section('content')
+
+@if (Auth::user()->id > 1)
+    <script>
+        window.location.href = "/"
+    </script>
+@endif
 <div class="utama d-flex">
     <div class="box_kelola1">
         @if ($errors->any())
