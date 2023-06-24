@@ -40,20 +40,22 @@ class PesananController extends Controller
     public function store(Request $request)
     {
         $id_item = $request->input('id_item');
-        
+
         $foto = null;
         // dd($request);
-        
+
         $request->validate([
             'tanggal_pinjam' => 'required',
             'tanggal_kembali' => 'required',
-            'bukti_transaksi' => 'nullable',
+            // 'bukti_transaksi' => 'nullable',
             'catatan' => 'nullable',
             'total' => 'required',
-            'id_item' => 'required|exists:kelola_barangs,id_item',
-            'pesanan_id' => 'required|exists:pesanan,pesanan_id',
+            // 'id_item' => 'required|exists:kelola_barangs,id_item',
+            // 'pesanan_id' => 'required|exists:pesanan,pesanan_id',
+            'items' => 'required|array',
         ]);
-        
+
+        // dd($request);
 
         if($request->file('image')){
             $foto = $request->file('image')->store('images', 'public');
@@ -68,11 +70,12 @@ class PesananController extends Controller
         $pesanan->total=$request->get('total');
 
         $pesanan->save();
-        
-        $items = kelolaBarangs::find($id_item);
 
-        
-        $pesanan->kelolaBarangs()->attach($items->id_item);
+        // $items = kelolaBarangs::find($id_item);
+
+        // $pesanan->kelolaBarangs()->attach($items->id_item);
+        $items = $request->get('items');
+        $pesanan->kelolaBarangs()->attach($items);
 
         return redirect()->route('cart');
     }

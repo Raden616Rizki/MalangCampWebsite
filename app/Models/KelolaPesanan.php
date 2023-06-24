@@ -24,7 +24,7 @@ class KelolaPesanan extends Model
     ];
 
     public function kelolaBarangs(){
-        return $this->belongsToMany(kelolaBarangs::class, "items_pesanan", "pesanan_id", "id_item");
+        return $this->belongsToMany(kelolaBarangs::class, "items_pesanan", "pesanan_id", "items_id");
     }
 
     // public function Items_Pesanan(){

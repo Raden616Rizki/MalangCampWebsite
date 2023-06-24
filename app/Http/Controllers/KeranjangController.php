@@ -25,7 +25,7 @@ class KeranjangController extends Controller
 
 
 
-    public function addToCart($id_item) 
+    public function addToCart($id_item)
     {
         $product = kelolaBarangs::find($id_item);
 
@@ -58,7 +58,7 @@ class KeranjangController extends Controller
 
             $cart[$id_item]['quantity']++;
 
-            session()->put('cart', $cart); 
+            session()->put('cart', $cart);
 
             return redirect()->back()->with('success', 'Product added to cart successfully!');
 
