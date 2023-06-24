@@ -29,7 +29,6 @@ class UpdateChatRequests extends FormRequest
             'receiver_id' => 'required',
             'chat' => 'required',
             'file' => 'required',
-            'date_time' => 'required',
             'is_read' => 'required',
         ];
     }

@@ -14,6 +14,7 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OTPController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LiveChatController;
 use App\Http\Controllers\PaketMemberController;
 
 /*
@@ -41,7 +42,7 @@ Route::get('/account', function () {
 
 Route::get('/update-account', function () {
     return view('updateAccount');
-})->middleware('auth');;
+})->middleware('auth');
 
 Route::get('/home', function () {
     return redirect('/');
@@ -49,7 +50,7 @@ Route::get('/home', function () {
 
 Route::get('/contact-us', function () {
     return view('contactUs');
-})->middleware('auth');;
+})->middleware('auth');
 
 Route::get('/kelolaPaket', function () {
     return view('kelolaPaket');
@@ -81,7 +82,7 @@ Route::get('/paketMember/{paket_id}', [PaketMemberController::class, 'show']);
 
 Route::delete('/data/{id}', [DataController::class, 'destroy'])->name('data.destroy')->middleware('auth');
 
-Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('kelolaBarang', KelolaBarangController::class);
 
@@ -99,6 +100,8 @@ Route::resource('paket', PaketController::class);
 
 Route::get('/otp', [OTPController::class, 'show'])->name('verification-get');
 Route::post('/otp', [OTPController::class, 'verify'])->name('verification-post');
+
+Route::get('/live-chat/{user_id}', [LiveChatController::class, 'index']);
 
 Route::post('/cart/add',[KeranjangController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart', [KeranjangController::class,'showCart'])->name('cart.show');

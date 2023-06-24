@@ -1219,14 +1219,14 @@
                         <select class="form-select" aria-label="Default select example">
                             @if (Auth::user()->id > 1)
 
-                            <option value={{ $users->id }} selected><span>{{ $users->name }}</span><strong> (5)</strong>
+                            <option value={{ $users->id }} selected><span>{{ $users->name }}</span><!-- <strong> (5)</strong> -->
                             </option>
 
                             @elseif (Auth::user()->id == 1)
 
                             @foreach ($users as $user)
 
-                            <option value={{ $user->id }} selected><span>{{ $user->name }}</span><strong> (5)</strong>
+                            <option value={{ $user->id }} selected><span>{{ $user->name }}</span><!-- <strong> (5)</strong>  -->
                             </option>
 
                             @endforeach
@@ -1238,7 +1238,7 @@
                         <img src="{{asset('static/image/minimize-2-icon.png')}}" alt="minimize-icon">
                     </td>
                     <td id="maximize-chat">
-                        <a href="/api/live-chat"><img src="{{asset('static/image/maximize-icon.png')}}"
+                        <a href="/live-chat/"><img src="{{asset('static/image/maximize-icon.png')}}"
                                 alt="maximize-icon"></a>
                     </td>
                 </tr>
@@ -1358,7 +1358,7 @@
     </script> --}}
 
     <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
-    <script src="{{asset('static/js/live-chat.js')}}"></script>
+    <script src="{{asset('static/js/live-chat-layout.js')}}"></script>
 </body>
 
 </html>
