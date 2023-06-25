@@ -132,7 +132,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <ul class="nav">
+                            <ul class="nav" id="list-user">
                                 @if (Auth::user()->id > 1)
 
                                 <li class="nav-item user-list active" user-id="{{ $users->id }}">
@@ -140,7 +140,7 @@
                                         <i class="fa fa-user nav-icon text-dark" data-toggle="tooltip"
                                             data-placement="right" title="{{ $users->name }}"></i>
                                         <span class="mr-1">{{ $users->name }}</span>
-                                        {{-- <span class="badge badge-info">5</span> --}}
+                                        <span class="badge badge-info" id="chat-notif-{{ $users->id }}"></span>
                                     </a>
                                 </li>
 
@@ -156,7 +156,7 @@
                                         <i class="fa fa-user nav-icon text-light" data-toggle="tooltip"
                                             data-placement="right" title="{{ $user->name }}"></i>
                                         <span class="mr-1">{{ $user->name }}</span>
-                                        {{-- <span class="badge badge-info">5</span> --}}
+                                        <span class="badge badge-info" id="chat-notif-{{ $user->id }}"></span>
                                     </a>
                                 </li>
 
@@ -168,7 +168,7 @@
                                         <i class="fa fa-user nav-icon text-dark" data-toggle="tooltip"
                                             data-placement="right" title="{{ $user->name }}"></i>
                                         <span class="mr-1">{{ $user->name }}</span>
-                                        {{-- <span class="badge badge-info">5</span> --}}
+                                        <span class="badge badge-info" id="chat-notif-{{ $user->id }}"></span>
                                     </a>
                                 </li>
 
