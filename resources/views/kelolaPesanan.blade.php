@@ -55,6 +55,7 @@
                 <button type="submit" class="konf" style="background: #FFFFFF;
                 border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
                 color: #000000; border:none; width:15vh;">{{ __('Save') }}</button>
+                {{-- p --}}
             </div>
         </form>
     </div>
