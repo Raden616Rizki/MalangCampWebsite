@@ -193,10 +193,19 @@
                         </div>
                         @endforeach
 
+
+                       
+
+
+
                     </div>
                 </div>
             </div>
         </div>
+        <div>
+        <a class="btn btn-light" style="margin-left:310px; margin-bottom:-80px;"
+                                href="{{ route('cetak_laporanBarang') }}">Cetak</a>
+                                </div>
     </div>
 </div>
 </div>

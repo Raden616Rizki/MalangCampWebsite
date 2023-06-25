@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\KelolaBarang;
+use App\Models\laporanBarang_pdf;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class KelolaBarangController extends Controller
 {
@@ -171,6 +173,12 @@ class KelolaBarangController extends Controller
         $kelolaBarang->delete();
 
         return redirect()->route('kelolaBarang.index')->with('success', 'Item Berhasil Dihapus');
+    }
+
+    public function cetak_pdf(){
+        $KelolaBarang = KelolaBarang::all();
+        $pdf = PDF::loadview('laporanBarang_pdf',['KelolaBarang'=>$KelolaBarang]);
+        return $pdf->stream();
     }
 
 }

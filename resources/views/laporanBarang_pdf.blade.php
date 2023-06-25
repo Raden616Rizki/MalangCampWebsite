@@ -2,13 +2,13 @@
 <html>
 
 <head>
-    <title>Laporan Data Paket</title>
+    <title>Laporan Data Barang</title>
     <style>
 table, th, td {
   border: 2px solid black;
   padding: 30px;
   border-collapse: collapse;
-  margin-left: 75px;
+  margin-left: 20px;
 }
 </style>
 </head>
@@ -22,25 +22,29 @@ table, th, td {
 
     </style>
     <center>
-        <h5>Laporan Data Paket</h5>
+        <h5>Laporan Data Barang</h5>
     </center>
     <table class='table table-bordered'>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama Paket</th>
-                <th>Harga Paket</th>
+                <th>Nama Item</th>
+                <th>Stok</th>
+                <th>Jenis</th>
+                <th>Harga</th>
                 <th>Gambar</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($Paket as $a)
+            @foreach($KelolaBarang as $a)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{$a->nama_paket}}</td>
-                <td>{{$a->harga_paket}}</td>
+                <td>{{$a->nama_item}}</td>
+                <td>{{$a->stok}}</td>
+                <td>{{$a->jenis}}</td>
+                <td>{{$a->harga}}</td>
                 <!-- <td>{{$a->image_paket}}</td> -->
-                <td><img width="100px" src="{{ storage_path('app/public/'.$a->image_paket) }}"></td>
+                <td><img width="100px" src="{{ storage_path('app/public/'.$a->gambar) }}"></td>
             </tr>
             @endforeach
         </tbody>
