@@ -90,11 +90,16 @@ class PesananController extends Controller
      * @param  \App\Models\KelolaPesanan  $kelolaPesanan
      * @return \Illuminate\Http\Response
      */
-    public function show()
-    {
-        return view('kelolaPesanan');
+    public function show(){
+        $pesanans = KelolaPesanan::with('kelolaBarangs')->get();
+
+        return view('kelolaPesanan', compact('pesanans'));
     }
 
+    public function showTransaksi(){
+        $pesanan = KelolaPesanan::all();
+        return view('laporanTransaksi', compact('pesanan'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -120,12 +125,13 @@ class PesananController extends Controller
         ]);
 
         $pesanan = KelolaPesanan::find($pesanan_id);
-        $pesanan->status_pembayaran=$request->get('status_pembayaran');
+        $pesanan->status_pembayaran = $request->input('status_pembayaran');
 
         $pesanan->save();
 
         return redirect()->route('kelolaPesanan');
     }
+    
 
     /**
      * Remove the specified resource from storage.

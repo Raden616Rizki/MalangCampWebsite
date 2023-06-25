@@ -468,12 +468,13 @@
 
 
         .kolom-bawah .tombol{
-            margin-left: 77%;
+            margin-left: 50%;
         }
 
         .kolom-bawah .tombol .payment{
             display: inline-block;
         }
+
 
         .kolom-bawah .tombol .konfirmasi{
             display: inline-block;

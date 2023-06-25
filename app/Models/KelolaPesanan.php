@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class KelolaPesanan extends Model
 {
@@ -25,6 +26,11 @@ class KelolaPesanan extends Model
 
     public function kelolaBarangs(){
         return $this->belongsToMany(kelolaBarangs::class, "items_pesanan", "pesanan_id", "items_id");
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // public function Items_Pesanan(){

@@ -11,6 +11,7 @@ use App\Http\Controllers\KelolaBarangController;
 use App\Http\Controllers\updateUserController;
 use App\Http\Controllers\TambahPesananController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OTPController;
 use App\Http\Controllers\HomeController;
@@ -68,7 +69,7 @@ Route::get('/updatePaket', function () {
 
 Route::get('/kelolaPesanan', [App\Http\Controllers\PesananController::class, 'show'])->name('kelolaPesanan');
 
-Route::get('/laporanTransaksi', [App\Http\Controllers\TransaksiController::class, 'show'])->name('laporanTransaksi');
+Route::get('/laporanTransaksi', [App\Http\Controllers\PesananController::class, 'showTransaksi'])->name('laporanTransaksi');
 
 // Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class])->name('register');
 
@@ -126,3 +127,5 @@ Route::patch('update-cart', [KeranjangController::class,'update'])->name('update
 Route::delete('remove-from-cart', [KeranjangController::class,'remove'])->name('remove');
 
 Route::resource('keranjang',PesananController::class);
+
+Route::resource('laporan',LaporanController::class);

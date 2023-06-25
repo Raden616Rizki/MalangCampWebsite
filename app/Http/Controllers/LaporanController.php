@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaksi;
+use App\Models\KelolaPesanan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TransaksiController extends Controller
+class LaporanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,21 +42,23 @@ class TransaksiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Transaksi  $transaksi
+     * @param  \App\Models\KelolaPesanan  $kelolaPesanan
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaksi $transaksi)
+    public function show()
     {
-        return view('laporanTransaksi');
+        $pesanans = KelolaPesanan::with('kelolaBarangs')->get();
+
+        return view('laporanTransaksi', compact('pesanans'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Transaksi  $transaksi
+     * @param  \App\Models\KelolaPesanan  $kelolaPesanan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaksi $transaksi)
+    public function edit(KelolaPesanan $kelolaPesanan)
     {
         //
     }
@@ -65,21 +67,30 @@ class TransaksiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Transaksi  $transaksi
+     * @param  \App\Models\KelolaPesanan  $kelolaPesanan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaksi $transaksi)
+    public function update(Request $request, $pesanan_id)
     {
-        //
+        $request->validate([
+            'status_order' => 'required',
+        ]);
+
+        $pesanan = KelolaPesanan::find($pesanan_id);
+        $pesanan->status_order = $request->input('status_order');
+
+        $pesanan->save();
+
+        return redirect()->route('laporanTransaksi');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Transaksi  $transaksi
+     * @param  \App\Models\KelolaPesanan  $kelolaPesanan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaksi $transaksi)
+    public function destroy(KelolaPesanan $kelolaPesanan)
     {
         //
     }
