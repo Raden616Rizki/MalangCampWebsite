@@ -30,41 +30,45 @@ class KeranjangController extends Controller
         $product = kelolaBarangs::find($id_item);
 
         if(!$product) {
-
             abort(404);
-
         }
+
         $cart = session()->get('cart');
 
-        // if cart is empty then this the first product
+        // Jika keranjang kosong, tambahkan produk sebagai produk pertama
         if(!$cart) {
-
             $cart = [
-                    $id_item => [
-                        "nama_item" => $product->nama_item,
-                        "quantity" => 1,
-                        "harga" => $product->harga,
-                        "gambar" => $product->gambar
-                    ]
+                $id_item => [
+                    "nama_item" => $product->nama_item,
+                    "quantity" => 1,
+                    "harga" => $product->harga,
+                    "gambar" => $product->gambar,
+                    "stok" => $product->stok
+                ]
             ];
 
             session()->put('cart', $cart);
 
-            return redirect()->back()->with('success', 'added to cart successfully!');
+            return redirect()->back()->with('success', 'Added to cart successfully!');
         }
 
-        // if cart not empty then check if this product exist then increment quantity
+        // Jika produk sudah ada dalam keranjang, periksa apakah penambahan akan melebihi stok
         if(isset($cart[$id_item])) {
+            $newQuantity = $cart[$id_item]['quantity'] + 1;
 
-            $cart[$id_item]['quantity']++;
+            // Jika jumlah baru melebihi stok, tampilkan pesan error
+            if ($newQuantity > $product->stok) {
+                return redirect()->back()->with('error', 'Cannot add to cart. Stock quantity exceeded!');
+            }
+
+            $cart[$id_item]['quantity'] = $newQuantity;
 
             session()->put('cart', $cart);
 
             return redirect()->back()->with('success', 'Product added to cart successfully!');
-
         }
 
-
+        // Jika produk belum ada dalam keranjang
         $cart[$id_item] = [
             "nama_item" => $product->nama_item,
             "quantity" => 1,
@@ -73,43 +77,40 @@ class KeranjangController extends Controller
             "stok" => $product->stok
         ];
 
-        session()->put('cart', $cart); // this code put product of choose in cart
+        session()->put('cart', $cart);
 
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
+
     // update product of choose in cart
     public function update(Request $request)
     {
-        if($request->id_item and $request->quantity)
-        {
+        if ($request->id_item && $request->quantity) {
             $cart = session()->get('cart');
 
-            $cart[$request->id_item]["quantity"] = $request->quantity;
-
-            session()->put('cart', $cart);
-
-            session()->flash('success', 'Cart updated successfully');
+            if (isset($cart[$request->id_item])) {
+                $cart[$request->id_item]["quantity"] = $request->quantity;
+                session()->put('cart', $cart);
+                session()->flash('success', 'Cart updated successfully');
+            }
         }
     }
 
-    // delete or remove product of choose in cart
+
     public function remove(Request $request)
     {
-        if($request->id_item) {
-
+        if ($request->id_item) {
             $cart = session()->get('cart');
 
-            if(isset($cart[$request->id_item])) {
-
+            if (isset($cart[$request->id_item])) {
                 unset($cart[$request->id_item]);
-
                 session()->put('cart', $cart);
+                session()->flash('success', 'Product removed successfully');
             }
-
-            session()->flash('success', 'Product removed successfully');
         }
     }
+
 
 
 

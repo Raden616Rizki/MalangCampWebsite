@@ -68,7 +68,7 @@ Route::get('/updatePaket', function () {
 
 Route::get('/kelolaPesanan', [App\Http\Controllers\PesananController::class, 'show'])->name('kelolaPesanan');
 
-Route::get('/laporanTransaksi', [App\Http\Controllers\PesananController::class, 'showTransaksi'])->name('laporanTransaksi');
+Route::get('/laporanTransaksi', [App\Http\Controllers\LaporanController::class, 'show'])->name('laporanTransaksi');
 
 // Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class])->name('register');
 
@@ -119,9 +119,9 @@ Route::get('cartt', [KeranjangController::class,'cart'])->name('cartt');
 
 Route::get('add-to-cart/{id}', [KeranjangController::class,'addToCart'])->name('addToCart');
 
-Route::patch('update-cart', [KeranjangController::class,'update'])->name('update');
+Route::patch('update-cart', [KeranjangController::class,'update'])->name('update-cart');
 
-Route::delete('remove-from-cart', [KeranjangController::class,'remove'])->name('remove');
+Route::delete('remove-from-cart', [KeranjangController::class,'remove'])->name('remove-from-cart');
 
 Route::resource('keranjang',PesananController::class);
 

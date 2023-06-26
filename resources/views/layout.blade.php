@@ -340,7 +340,6 @@
             box-shadow: 6px 0px 10px rgba(0, 0, 0, 0.25);
             border-radius: 30px;
             width: 50%;
-            height: 88%;
             margin-top: 1vh;
             margin-right: 3vh;
             margin-left: 3vh;
@@ -348,7 +347,6 @@
 
         .show-item-cart{
             width: 100%;
-            height: 6vh;
             background: #FFFFFF;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border-radius: 18px;
@@ -361,9 +359,9 @@
             border: none;
             font-family: 'Inter';
             font-style: normal;
-            display: flex;
             color: #000000;
-            margin-left: 3vh;
+            
+            padding-left: 3vh;
         }
 
         .cart-pesanan .content-cart .right-box-cart{
@@ -1084,10 +1082,10 @@
                     <a href="/paket" class="nav-link">Paket</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/order" class="nav-link">Order</a>
+                    <a href="/kelolaPesanan" class="nav-link">Order</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/report" class="nav-link">Report</a>
+                    <a href="/laporanTransaksi" class="nav-link">Report</a>
                 </li>
                 @endif
                 <li class="nav-item d-none d-sm-inline-block">

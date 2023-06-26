@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Items_Pesanan;
 use App\Models\KelolaPesanan;
+use App\Models\kelolaBarangs;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -17,7 +19,7 @@ class LaporanController extends Controller
     {
     $pesanan = KelolaPesanan::all();
 
-    return view('laporan.index', compact('pesanan'));
+    return view('laporanTransaksi', compact('pesanan'));
     }
 
 
@@ -50,9 +52,8 @@ class LaporanController extends Controller
      */
     public function show()
     {
-        $pesanans = KelolaPesanan::with('kelolaBarangs')->get();
-
-        return view('laporanTransaksi', compact('pesanans'));
+        $pesanan = KelolaPesanan::with('kelolaBarangs')->get();
+        return view('laporanTransaksi', compact('pesanan'));
     }
 
     /**
@@ -79,20 +80,20 @@ class LaporanController extends Controller
             'status_pembayaran' => 'required',
             'status_order' => 'required',
         ]);
-        
+
         // dd($request);
         $pesananIds = $request->input('pesanan_id');
         $statusPembayaran = $request->input('status_pembayaran');
         $statusOrder = $request->input('status_order');
-        
+
         // Loop through each pesanan id
         foreach ($pesananIds as $index => $pesananId) {
             $pesanan = KelolaPesanan::findOrFail($pesananId);
-            
+
             // Update the status_pembayaran and status_order
             $pesanan->status_pembayaran = $statusPembayaran[$index];
             $pesanan->status_order = $statusOrder[$index];
-            
+
             $pesanan->save();
         }
 
@@ -106,8 +107,10 @@ class LaporanController extends Controller
      * @param  \App\Models\KelolaPesanan  $kelolaPesanan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KelolaPesanan $kelolaPesanan)
+    public function destroy($pesanan_id)
     {
-        //
+        Items_Pesanan::where('pesanan_id', $pesanan_id)->delete();
+        KelolaPesanan::where('pesanan_id', $pesanan_id)->delete();
+        return redirect()->route('laporanTransaksi');
     }
 }

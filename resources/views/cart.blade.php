@@ -6,7 +6,7 @@
         <h3 style="color: black; text-align:center; padding-top: 1vh"><b>Cart Pesanan</b></h3>
         <form method="POST" action="{{route('keranjang.store')}}" enctype="multipart/form-data">
             @csrf
-            <div class="content-cart" style="display:flex; width:100%; height:100%">
+            <div class="content-cart" style="display:flex; width:100%; height:100%;">
                 <div class="left-box-cart">
                     <div class="content-left-box-cart">
                         <?php $total = 0 ?>
@@ -16,10 +16,15 @@
                         <table class="show-item-cart">
                             <tr>
                                 <td><input type="text" value="{{ $details['nama_item'] }}" disabled></td>
-                                <td><input type="number" value="{{ $details['quantity'] }}"
-                                        class="form-control quantity" style="width: 9vh" /></td>
-                                <td><button type="submit" class="btn btn-danger btn-sm remove-from-cart delete"
-                                        data-id="{{ $id_item }}"><i class="fa fa-trash-o"></i>X</button></td>
+                                <td>
+                                    <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity" data-id="{{ $id_item }}">
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id_item }}">
+                                        <i class="fa fa-trash-o"></i> X
+                                    </button>
+                                </td>
+
                                 <td style="display: none;">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="{{ $id_item }}"
@@ -84,44 +89,49 @@
         </form>
     </div>
 </div>
-@endsection
-@section('scripts')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script type="text/javascript">
-// this function is for update card
-        $(".update-cart").click(function (e) {
-            e.preventDefault();
+<script>
 
-           var ele = $(this);
+    $(document).on("click", ".quantity", function (e) {
+        e.preventDefault();
+        var ele = $(this);
+        var id = ele.attr("data-id");
+        var quantity = ele.val();
+        var maxQuantity = ele.attr("data-max");
 
-            $.ajax({
-               url: '{{ url('update-cart') }}',
-               method: "patch",
-               data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("tr").find(".quantity").val()},
-               success: function (response) {
-                    window.location.reload();
-               }
-            });
-        });
+        if (quantity > maxQuantity) {
+            alert("Jumlah barang melebihi stok yang tersedia.");
+            ele.val(maxQuantity);
+            return;
+        }
 
-        $(".remove-from-cart").click(function (e) {
-            e.preventDefault();
-
-            var ele = $(this);
-
-            if(confirm("Are you sure")) {
-                $.ajax({
-                    url: '{{ url('remove-from-cart') }}',
-                    method: "DELETE",
-                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
-                    success: function (response) {
-                        window.location.reload();
-
-                    }
-                });
+        $.ajax({
+            url: '{{ url('update-cart') }}',
+            method: "patch",
+            data: {_token: '{{ csrf_token() }}', id_item: id, quantity: quantity},
+            success: function (response) {
+                window.location.reload();
             }
         });
+    });
 
-    </script>
+    $(document).on("click", ".remove-from-cart", function (e) {
+        e.preventDefault();
+        var ele = $(this);
+        var id = ele.attr("data-id");
+
+        if (confirm("Are you sure?")) {
+            $.ajax({
+                url: '{{ url('remove-from-cart') }}',
+                method: "DELETE",
+                data: {_token: '{{ csrf_token() }}', id_item: id},
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+</script>
 @endsection
