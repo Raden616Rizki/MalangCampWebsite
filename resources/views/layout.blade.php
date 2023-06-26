@@ -536,7 +536,7 @@
         }
 
         .nama {
-            font-size: 10px;
+            font-size: 15px;
             margin-left: 15px;
             font-family: 'Inter';
             font-style: normal;
@@ -875,7 +875,7 @@
                 </li>
                 @if (Auth::user()->id == 1)
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/item" class="nav-link header-link">Item</a>
+                    <a href="/kelolaBarang" class="nav-link header-link">Item</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/paket" class="nav-link">Paket</a>

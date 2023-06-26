@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\KelolaBarang;
+use Barryvdh\DomPDF\Facade\PDF;
+
+
+
 
 class KelolaBarangController extends Controller
 {
@@ -162,5 +166,14 @@ class KelolaBarangController extends Controller
     
         return redirect()->route('kelolaBarang.index')->with('success', 'Item Berhasil Dihapus');
     }
+
+    public function print_pdf($id_item)
+    {
+        $cetak= KelolaBarang::find($id_item);
+    
+        $pdf = PDF::loadView('print_pdf', compact(['cetak']));
+        return $pdf->download('listBarang.pdf');
+    }
+    
     
 }
