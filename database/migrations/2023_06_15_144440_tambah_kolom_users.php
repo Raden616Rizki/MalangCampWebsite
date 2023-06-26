@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        //
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->string('username');
+            $table->string('phoneNumber');
+            $table->string('address');
             $table->string('photo_profile')->nullable();
+            $table->string('otp_code')->nullable();
+            $table->datetime('otp_expired')->nullable();
         });
     }
 
@@ -27,10 +30,14 @@ return new class extends Migration
      */
     public function down()
     {
-        //
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('photo_profile');
+            $table->dropColumn('username');
+            $table->dropColumn('phoneNumber');
+            $table->dropColumn('address');
+            $table->dropColumn('photo_profile')->nullable();
+            $table->dropColumn('otp_code')->nullable();
+            $table->dropColumn('otp_expired')->nullable();
         });
     }
 };

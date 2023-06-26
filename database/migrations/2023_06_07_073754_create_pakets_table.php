@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->string('otp_code')->nullable();
-            $table->datetime('otp_expired')->nullable();
+        Schema::create('paket', function (Blueprint $table) {
+            $table->id('paket_id');
+            $table->string('nama_paket');
+            $table->string('image_paket');
+            $table->timestamps();
         });
     }
 
@@ -27,10 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropColumn('otp_code');
-            $table->dropColumn('otp_expired');
-        });
+        Schema::dropIfExists('paket');
     }
 };

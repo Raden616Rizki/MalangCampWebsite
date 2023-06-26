@@ -41,7 +41,7 @@
 
         </div>
         <button type="submit" class="btn btn-primary"
-            style="width:75%; background-color:#96858F; border-radius:8px; padding:10px; border:none; margin-bottom:30px;margin-left:16vh;color:white; font-size:16px;">
+            style="width:75%; background-color:#96858F; border-radius:8px; padding:10px; border:none; margin-bottom:30px;margin-left:16vh;color:white; font-size:16px; cursor: pointer;">
             {{ __('LOGIN') }}
         </button>
 

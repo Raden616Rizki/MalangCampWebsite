@@ -43,6 +43,19 @@
                     <form method="post" action="" id="myForm" enctype="multipart/form-data">
                             @csrf
 
+                    <div class="kolom">
+                                <input id="email" placeholder="Password Baru" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus style="background:white; margin-bottom:30px; outline:0;">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        </div>
+
+                        <div class="kolom">
+                            <div class="col-md-6">
+                                <input id="Confirm Password" placeholder="Confirm Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" style="background:white;outline:0;margin-bottom:30px;">
+
                             <div class="kolom">
                                         <input id="email" placeholder="Email Address" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus style="background:white; margin-bottom:30px; outline:0; width:50%;">
                                         @error('email')

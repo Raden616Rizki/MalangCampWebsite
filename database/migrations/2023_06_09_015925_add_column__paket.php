@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('username');
-            $table->string('phoneNumber');
-            $table->string('address');
+        Schema::table('paket', function (Blueprint $table) {
+            //
+            $table->float('harga_paket')->after('nama_paket')->nullable();
+
         });
     }
 
@@ -27,8 +27,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('paket', function (Blueprint $table) {
             //
+            $table->dropColumn('harga_paket');
         });
     }
 };

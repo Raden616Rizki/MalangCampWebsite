@@ -20,3 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('live-chat', ChatController::class);
+
+Route::get('/live-chat/count/{sender_id}', [ChatController::class, 'countChat']);
+Route::put('/live-chat/count/{sender_id}', [ChatController::class, 'updateIsRead']);

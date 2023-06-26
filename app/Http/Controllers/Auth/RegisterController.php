@@ -72,7 +72,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $photo = 'static/image/default_profile.png';
+        $photo = 'static/photo_profile/default_profile.png';
 
         // Membuat OTP
         $otpCode = Str::random(6);
@@ -101,11 +101,11 @@ class RegisterController extends Controller
             }
         }
 
-        $photo = 'static/image/default_profile.png';
+        $photo = 'static/photo_profile/default_profile.png';
 
         // Membuat OTP
         $otpCode = Str::random(6);
-        $otpExpired = Carbon::now()->addMinutes(1);
+        $otpExpired = Carbon::now()->addMinutes(4);
 
         $this->validator($request->all())->validate();
 

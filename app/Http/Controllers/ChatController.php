@@ -21,7 +21,7 @@ class ChatController extends Controller
     public function index()
     {
         //
-        return view('live-chat');
+        // return view('live-chat');
     }
 
     /**
@@ -44,13 +44,20 @@ class ChatController extends Controller
     {
         //
         $dateTime = Carbon::now();
+        $file = $request->file;
+
+        if ($file != 'knowhere') {
+            $fileName = $request->file->getClientOriginalName();
+            $fileName = $dateTime->format('Y-m-d_H.i.s') . '_' . $fileName;
+            $file = $request->file->storeAs('static/file_chat', $fileName, 'public');
+        }
 
         new ChatResource(Chat::create(
             [
                 'sender_id' => $request->sender_id,
                 'receiver_id' => $request->receiver_id,
                 'chat' => $request->chat,
-                'file' => $request->file,
+                'file' => $file,
                 'date_time' => $dateTime,
                 'is_read' => $request->is_read,
             ]
@@ -93,15 +100,27 @@ class ChatController extends Controller
      * @param  \App\Models\Chat  $chat
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateChatRequests $request, Chat $chat)
+    public function update(UpdateChatRequests $request, $chat_id)
     {
         //
+        $chat = Chat::find($chat_id);
+        $dateTime = Carbon::now();
+        $file = $request->file;
+
+        if ($file != 'knowhere') {
+            \Storage::delete('public/'.$chat->file);
+
+            $fileName = $request->file->getClientOriginalName();
+            $fileName = $dateTime->format('Y-m-d_H.i.s') . '_' . $fileName;
+            $file = $request->file->storeAs('static/file_chat', $fileName, 'public');
+        }
+
         $chat->update([
             'sender_id' => $request->sender_id,
             'receiver_id' => $request->receiver_id,
             'chat' => $request->chat,
-            'file' => $request->file,
-            'date_time' => $request->date_time,
+            'file' => $file,
+            'date_time' => $dateTime,
             'is_read' => $request->is_read,
         ]);
 
@@ -115,10 +134,27 @@ class ChatController extends Controller
      * @param  \App\Models\Chat  $chat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Chat $chat)
+    public function destroy($chat_id)
     {
         //
+        $chat = Chat::find($chat_id);
+        if($chat->file != 'knowhere') {
+            \Storage::delete('public/'.$chat->file);
+        }
         $chat->delete();
         return response()->noContent();
+    }
+
+    public function countChat($sender_id) {
+        $total = Chat::where('sender_id', $sender_id)->where('is_read', 0)->count();
+
+        return response()->json(['total' => $total]);
+    }
+
+    public function updateIsRead($sender_id) {
+        Chat::where('sender_id', $sender_id)->Where('is_read', 0)->update(['is_read' => 1]);
+        // $chatResult = ChatResource::collection($newChat);
+        // return $chatResult;
+        return response()->json(['message' => 'Success Update is Read']);
     }
 }
