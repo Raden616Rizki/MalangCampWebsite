@@ -15,8 +15,11 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        //
+    $pesanan = KelolaPesanan::all();
+
+    return view('laporan.index', compact('pesanan'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -73,16 +76,29 @@ class LaporanController extends Controller
     public function update(Request $request, $pesanan_id)
     {
         $request->validate([
+            'status_pembayaran' => 'required',
             'status_order' => 'required',
         ]);
-
-        $pesanan = KelolaPesanan::find($pesanan_id);
-        $pesanan->status_order = $request->input('status_order');
-
-        $pesanan->save();
+        
+        // dd($request);
+        $pesananIds = $request->input('pesanan_id');
+        $statusPembayaran = $request->input('status_pembayaran');
+        $statusOrder = $request->input('status_order');
+        
+        // Loop through each pesanan id
+        foreach ($pesananIds as $index => $pesananId) {
+            $pesanan = KelolaPesanan::findOrFail($pesananId);
+            
+            // Update the status_pembayaran and status_order
+            $pesanan->status_pembayaran = $statusPembayaran[$index];
+            $pesanan->status_order = $statusOrder[$index];
+            
+            $pesanan->save();
+        }
 
         return redirect()->route('laporanTransaksi');
     }
+
 
     /**
      * Remove the specified resource from storage.

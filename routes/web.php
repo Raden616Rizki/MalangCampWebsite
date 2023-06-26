@@ -9,7 +9,6 @@ use App\Http\Controllers\DataController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\KelolaBarangController;
 use App\Http\Controllers\updateUserController;
-use App\Http\Controllers\TambahPesananController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -87,8 +86,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('kelolaBarang', KelolaBarangController::class);
 
-Route::resource('/tambahPesanan', TambahPesananController::class);
-
 // Route::get('/tambahPesanan', function () {
 //     return view('tambahPesanan');
 // });
@@ -129,3 +126,8 @@ Route::delete('remove-from-cart', [KeranjangController::class,'remove'])->name('
 Route::resource('keranjang',PesananController::class);
 
 Route::resource('laporan',LaporanController::class);
+
+
+
+
+

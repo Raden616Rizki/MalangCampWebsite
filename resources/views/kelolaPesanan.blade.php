@@ -1,64 +1,62 @@
 @extends('layout')
-@section('title', 'Laporan Transaksi')
+@section('title', 'Kelola Pesanan')
 @section('content')
-
-<div class="laporan-transaksi" style="padding-top: 3vh;">
-    <center style="font-family: 'ABeeZee'; font-style: normal;font-weight: 400;font-size: 22px;line-height: 26px;color: #000000;">Laporan Transaksi</center>
-    <div class="tabel-laporan" style="padding-top: 1vh;">
-        <table class="table table-bordered">
-            <thead>
-                <tr style="text-align: center;">
-                    <th>Id Pesanan</th>
-                        <th>Tanggal Transaksi</th>
-                        <th>Pembayaran</th>
-                        <th>Customer</th>
-                        <th>Status Order</th>
-                        <th>Total</th>
-                        <th>Detail</th>
+    <div class="box-pesanan" style="padding-top: 3vh;">
+        <center style="font-family: 'ABeeZee'; font-style: normal;font-weight: 400;font-size: 22px;line-height: 26px;color: #000000;">
+            Kelola Pesanan
+        </center>
+        @foreach($pesanans as $pesanan)
+        <div class="box-kelolaPesanan">
+            <h6 style="font-size:10px;font-family: 'ABeeZee';font-style: normal;font-weight: 400; margin-left:2vh; padding-top:1vh;color: #FFFFFF;">{{ $pesanan->user->name }}</h6>
+            <hr style="background-color: white">
+            <table class="tabel-kelola-pesanan">
+                <tbody style="font-family: 'Font Awesome 5 Brands';font-style: normal;color:#FFFFFF;">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($pesanan as $p)    
-                    <form action="{{ route('laporan.update') }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                    <tr style="text-align: center;">
-                        <td>{{ $p->pesanan_id }}</td>
-                        <td>{{ $p->created_at }}</td>
-                        <td>
-                            <select name="status_pembayaran[]" id="status_pembayaran" style="background: #FFFFFF;
-                                border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
-                                color: #000000; border:none; margin-left:1vh;">
-                                <option value="belum bayar" {{ $p->status_pembayaran == 'belum bayar' ? 'selected' : '' }}>Belum Bayar</option>
-                                <option value="lunas" {{ $p->status_pembayaran == 'lunas' ? 'selected' : '' }}>Lunas</option>
-                                <option value="dp" {{ $p->status_pembayaran == 'dp' ? 'selected' : '' }}>DP</option>
-                            </select>
-                        </td>
-                        <td>{{ $p->user->name }}</td>
-                        <td>
-                            <select name="status_order[]" id="status_order" style="background: #FFFFFF;
-                                border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
-                                color: #000000; border:none; margin-left:1vh;">
-                                <option value="belum diambil" {{ $p->status_order == 'belum diambil' ? 'selected' : '' }}>Belum Diambil</option>
-                                <option value="diambil" {{ $p->status_order == 'diambil' ? 'selected' : '' }}>Diambil</option>
-                                <option value="kembali" {{ $p->status_order == 'kembali' ? 'selected' : '' }}>Kembali</option>
-                                <option value="terlambat" {{ $p->status_order == 'terlambat' ? 'selected' : '' }}>Terlambat</option>
-                            </select>
-                        </td>
-                        <td>Rp{{ $p->total }}</td>
-                        <td></td>
-                    </tr>
+                    @foreach($pesanan->kelolaBarangs as $item)
+                        <tr>
+                            <td>{{ $item->nama_item }}</td>
+                            <td>{{--{{ $pesanan->jumlah_item}}--}}</td>
+                            <td>{{ $pesanan->tanggal_peminjaman}} - {{ $pesanan->tanggal_kembali}}</td>
+                            <td>{{ $item->harga}}</td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
-            <div class="konfirmasi">
-                <button type="submit" class="konf" style="background: #FFFFFF;
-                border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
-                color: #000000; border:none; width:15vh;">{{ __('Save') }}</button>
-                {{-- p --}}
+            <div class="kolom-bawah">
+                <div class="catatan" style="font-size:10px;font-family: 'Font Awesome 5 Brands';font-style: normal;color: #FFFFFF;margin-left:2vh; padding-top:1vh; list-style:none;">
+                    <li>Catatan : {{$pesanan->catatan}}</li>
+                    <li>Total   : {{$pesanan->total}}</li>
+                </div>
+                <div class="tombol">
+                    <form action="{{route('keranjang.update', $pesanan->pesanan_id)}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="payment">
+                            <button class="pay" style="background: #FFFFFF;
+                            border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
+                            color: #000000; border:none; width:15vh;">payment</button>
+                        </div>
+                        <select name="status_pembayaran" id="status_pembayaran" style="background: #FFFFFF;
+                        border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
+                        color: #000000; border:none; margin-left:1vh;">
+                            <option value="belum bayar" {{ $pesanan->status_pembayaran == 'belum bayar' ? 'selected' : '' }}>Belum Bayar</option>
+                            <option value="lunas" {{ $pesanan->status_pembayaran == 'lunas' ? 'selected' : '' }}>Lunas</option>
+                            <option value="dp" {{ $pesanan->status_pembayaran == 'dp' ? 'selected' : '' }}>DP</option>
+                        </select>
+                        <div class="konfirmasi">
+                            <button type="submit" class="konf" style="background: #FFFFFF;
+                            border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
+                            color: #000000; border:none; width:15vh;">{{ __('Kirim') }}</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
+        @endforeach
     </div>
-</div>
-
 @endsection
