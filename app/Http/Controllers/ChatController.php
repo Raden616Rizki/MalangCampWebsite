@@ -144,4 +144,17 @@ class ChatController extends Controller
         $chat->delete();
         return response()->noContent();
     }
+
+    public function countChat($sender_id) {
+        $total = Chat::where('sender_id', $sender_id)->where('is_read', 0)->count();
+
+        return response()->json(['total' => $total]);
+    }
+
+    public function updateIsRead($sender_id) {
+        Chat::where('sender_id', $sender_id)->Where('is_read', 0)->update(['is_read' => 1]);
+        // $chatResult = ChatResource::collection($newChat);
+        // return $chatResult;
+        return response()->json(['message' => 'Success Update is Read']);
+    }
 }

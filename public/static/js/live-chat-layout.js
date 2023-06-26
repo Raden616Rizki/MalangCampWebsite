@@ -33,6 +33,9 @@ $(document).ready(function () {
     $('.form-select').change(function() {
         let customerId = $('#choose-user .form-select').val();
 
+        // Update isRead
+        updateIsRead(customerId);
+
         $('#maximize-chat a').prop('href', `/live-chat/${customerId}`);
         showChat('show');
     });
@@ -40,11 +43,19 @@ $(document).ready(function () {
     // Polling CheckChat
     setInterval(function() {
         showChat('check');
+        updateOption();
     }, 8000);
 
     // Draggabel chat
     // $('#before-chat').draggable();
     // $('#after-chat').draggable();
+
+    // Update notif chat
+    updateOption();
+
+    // Update isRead
+    let customerId = $('#choose-user .form-select').val();
+    updateIsRead(customerId);
 });
 
 function closeChat() {
@@ -107,8 +118,6 @@ function showChat(dec) {
     }
 
     let urlGet = '/api/live-chat/' + customerId;
-
-    // console.log(loginId, ' : ', customerId);
 
     $.ajax({
         type: 'GET',
@@ -229,4 +238,50 @@ function getCookieValue() {
             return value;
         }
     }
+}
+
+function updateNotif(sender_id, text) {
+    let urlGet = `/api/live-chat/count/${sender_id}`;
+
+    $.ajax({
+        type: 'GET',
+        url: urlGet,
+        data: {},
+        success: function(response) {
+            // console.log(response['total']);
+            var total = response['total'];
+            var chatNotif = $(`#chat-notif-${sender_id}`);
+            chatNotif.empty();
+            chatNotif.append(`(${total}) ${text}`);
+        }
+    });
+}
+
+function updateIsRead(sender_id) {
+    let urlGet = `/api/live-chat/count/${sender_id}`;
+
+    $.ajax({
+        type: 'PUT',
+        url: urlGet,
+        data: {},
+        success: function(response) {
+            // console.log(response);
+            updateOption();
+        }
+    });
+}
+
+function updateOption() {
+    $('.form-select option').each(function() {
+
+        var value = $(this).val();
+        var text = $(this).filter(function() {
+            return $(this).val() == value;
+        }).text();
+
+        text = text.split(') ');
+        text = text[text.length - 1];
+        // console.log(text);
+        updateNotif(value, text);
+    });
 }

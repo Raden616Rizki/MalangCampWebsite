@@ -292,15 +292,13 @@
                         <select class="form-select" aria-label="Default select example">
                             @if (Auth::user()->id > 1)
 
-                            <option value={{ $users->id }} selected><span>{{ $users->name }}</span><!-- <strong> (5)</strong> -->
-                            </option>
+                            <option value={{ $users->id }} id="chat-notif-{{ $users->id }}" selected>{{ $users->name }}</option>
 
                             @elseif (Auth::user()->id == 1)
 
                             @foreach ($users as $user)
 
-                            <option value={{ $user->id }} selected><span>{{ $user->name }}</span><!-- <strong> (5)</strong>  -->
-                            </option>
+                            <option value={{ $user->id }} id="chat-notif-{{ $user->id }}" selected>{{ $user->name }}</option>
 
                             @endforeach
 
