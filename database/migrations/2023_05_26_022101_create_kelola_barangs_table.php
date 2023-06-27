@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('kelola_barangs', function (Blueprint $table) {
 
             $table->id('id_item');
-            $table->string('nama_item');
-            $table->integer('stok');
-            $table->string('jenis');
-            $table->String('keterangan');
-            $table->integer('harga');
+            $table->string('nama_item')->nullable();
+            $table->integer('stok')->nullable();
+            $table->string('jenis')->nullable();
+            $table->String('keterangan')->nullable();
+            $table->integer('harga')->nullable();
             $table->string('gambar')->nullable();
         });
     }

@@ -15,6 +15,7 @@ $(document).ready(function () {
 
     let customerId = $('.user-list.active').attr('user-id');
     changeReceiver(customerId);
+    updateIsRead(customerId);
 
     // Get File
     $('#file-input').change(function() {
@@ -59,10 +60,14 @@ $(document).ready(function () {
     // Polling CheckChat
     setInterval(function() {
         showChat('check');
+        updateOption();
     }, 8000);
 
     // Username Toggle
     $('[data-toggle="tooltip"]').tooltip();
+
+    // Get Notif
+    updateOption();
 });
 
 function getDataUser(userId) {
@@ -82,7 +87,7 @@ function getDataUser(userId) {
 function changeReceiver(customerId) {
     let userData = getDataUser(customerId);
 
-    $('.image-user img').prop('src', `http://localhost:8000/${ userData.photo_profile }`);
+    $('.image-user img').prop('src', `http://localhost:8000/storage/${ userData.photo_profile }`);
     $('.image-user h5').text(`${userData.name}`);
 }
 
@@ -101,6 +106,7 @@ function moveCustomer(userId) {
 
     let customerId = $('.user-list.active').attr('user-id');
     changeReceiver(customerId);
+    updateIsRead(customerId);
 
     showChat('show');
 }
@@ -231,7 +237,7 @@ function addNewChat(chat) {
                     ${chatText}
                 </td>
                 <td>
-                    <img src='http://localhost:8000/${ senderProfile }' class="img-circle elevation-2" alt="sender-img">
+                    <img src='http://localhost:8000/storage/${ senderProfile }' class="img-circle elevation-2" alt="sender-img">
                 </td>
             </tr>
             <tr id="date-time">
@@ -267,7 +273,7 @@ function addNewChat(chat) {
             </tr>
             <tr id="${chatId}">
                 <td>
-                    <img src='http://localhost:8000/${receiverProfile}' class="img-circle elevation-2" alt="receiver-img">
+                    <img src='http://localhost:8000/storage/${receiverProfile}' class="img-circle elevation-2" alt="receiver-img">
                 </td>
                 <td id="chat-receiver" class="chat-text">
                     ${chatText}
@@ -505,4 +511,42 @@ function getCookieValue() {
             return value;
         }
     }
+}
+
+function updateNotif(sender_id) {
+    let urlGet = `/api/live-chat/count/${sender_id}`;
+
+    $.ajax({
+        type: 'GET',
+        url: urlGet,
+        data: {},
+        success: function(response) {
+            // console.log(response['total']);
+            var total = response['total'];
+            var chatNotif = $(`#chat-notif-${sender_id}`);
+            chatNotif.empty();
+            chatNotif.append(total);
+        }
+    });
+}
+
+function updateIsRead(sender_id) {
+    let urlGet = `/api/live-chat/count/${sender_id}`;
+
+    $.ajax({
+        type: 'PUT',
+        url: urlGet,
+        data: {},
+        success: function(response) {
+            // console.log(response);
+            updateOption();
+        }
+    });
+}
+
+function updateOption() {
+    $('#list-user li').each(function() {
+        var userId = $(this).attr('user-id');
+        updateNotif(userId);
+    });
 }

@@ -1,5 +1,12 @@
 @extends('layout')
 @section('title', 'Paket')
+
+@section('search')
+<form action="/paketMember" method="GET" id="search-form">
+    <input class="main shadow" id="search-input" name="search-input" value="{{request('search-input')}}" placeholder="Search" style="text-size: 4px; font-weight: bold;"/><span class="searchicon"></span>
+</form>
+@endsection
+
 @section('content')
 <div class="all" style="padding-top:20px;" >
     <div id="table"
@@ -19,7 +26,7 @@
                 <table>
                     <tr>
                         @foreach ($paket->kelola_barangs as $barang)
-                        <img src="{{asset($barang->gambar)}}" class="img-fluid rounded-start"
+                        <img src="{{asset('storage/static/image_item/'.$barang->gambar)}}" class="img-fluid rounded-start"
                             style="height:80px; border-radius:20px; margin-left:13px; margin-top:17px; margin-bottom:10px;">
                         @endforeach
                     </tr>

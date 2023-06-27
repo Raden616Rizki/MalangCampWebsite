@@ -3,6 +3,14 @@
 
 <head>
     <title>Laporan Data Paket</title>
+    <style>
+table, th, td {
+  border: 2px solid black;
+  padding: 30px;
+  border-collapse: collapse;
+  margin-left: 75px;
+}
+</style>
 </head>
 
 <body>

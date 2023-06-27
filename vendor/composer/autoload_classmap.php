@@ -21,8 +21,16 @@ return array(
     'App\\Http\\Controllers\\DataController' => $baseDir . '/app/Http/Controllers/DataController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\KelolaBarangController' => $baseDir . '/app/Http/Controllers/KelolaBarangController.php',
-    'App\\Http\\Controllers\\PaketController' => $baseDir . '/app/Http/Controllers/PaketController.php',
+
+    'App\\Http\\Controllers\\KeranjangController' => $baseDir . '/app/Http/Controllers/KeranjangController.php',
+    'App\\Http\\Controllers\\LiveChatController' => $baseDir . '/app/Http/Controllers/LiveChatController.php',
     'App\\Http\\Controllers\\OTPController' => $baseDir . '/app/Http/Controllers/OTPController.php',
+    'App\\Http\\Controllers\\PaketController' => $baseDir . '/app/Http/Controllers/PaketController.php',
+    'App\\Http\\Controllers\\PaketMemberController' => $baseDir . '/app/Http/Controllers/PaketMemberController.php',
+    'App\\Http\\Controllers\\PesananController' => $baseDir . '/app/Http/Controllers/PesananController.php',
+    'App\\Http\\Controllers\\TambahPesananController' => $baseDir . '/app/Http/Controllers/TambahPesananController.php',
+    'App\\Http\\Controllers\\TransaksiController' => $baseDir . '/app/Http/Controllers/TransaksiController.php',
+    'App\\Http\\Controllers\\updateUserController' => $baseDir . '/app/Http/Controllers/updateUserController.php',
 
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
@@ -39,13 +47,21 @@ return array(
     'App\\Models\\KelolaPesanan' => $baseDir . '/app/Models/KelolaPesanan.php',
     'App\\Models\\Transaksi' => $baseDir . '/app/Models/Transaksi.php',
 
+    'App\\Http\\Requests\\StoreChatRequests' => $baseDir . '/app/Http/Requests/StoreChatRequests.php',
+    'App\\Http\\Requests\\UpdateChatRequests' => $baseDir . '/app/Http/Requests/UpdateChatRequests.php',
+    'App\\Http\\Resources\\ChatResource' => $baseDir . '/app/Http/Resources/ChatResource.php',
+
     'App\\Mail\\OtpMail' => $baseDir . '/app/Mail/OtpMail.php',
-    'App\\Models\\Cart' => $baseDir . '/app/Models/Cart.php',
+    // 'App\\Models\\Cart' => $baseDir . '/app/Models/Cart.php',
     'App\\Models\\Chat' => $baseDir . '/app/Models/Chat.php',
     'App\\Models\\Items_Pesanan' => $baseDir . '/app/Models/Items_Pesanan.php',
-    'App\\Models\\KelolaPesanan' => $baseDir . '/app/Models/KelolaPesanan.php',
+
+    'App\\Models\\KelolaBarang' => $baseDir . '/app/Models/KelolaBarang.php',
+    'App\\Models\\KelolaBarangsPaket' => $baseDir . '/app/Models/KelolaBarangsPaket.php',
+
+    // 'App\\Models\\KelolaPesanan' => $baseDir . '/app/Models/KelolaPesanan.php',
     'App\\Models\\Paket' => $baseDir . '/app/Models/Paket.php',
-    'App\\Models\\Transaksi' => $baseDir . '/app/Models/Transaksi.php',
+    // 'App\\Models\\Transaksi' => $baseDir . '/app/Models/Transaksi.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\kelolaBarangs' => $baseDir . '/app/Models/kelolaBarangs.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

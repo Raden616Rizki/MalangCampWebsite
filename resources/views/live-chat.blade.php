@@ -37,263 +37,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Charmonman&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            background-color: #D5D5D5;
-        }
-
-        #brand {
-            font-family: 'Charmonman', cursive;
-            font-style: normal;
-            font-weight: 400;
-            font-size: 24px;
-        }
-
-        .chat-column {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            height: 56px;
-            background-color: #AC608D;
-            box-sizing: border-box;
-            width: 100%;
-            box-shadow: 0 3px 8px rgb(0, 0, 0, 1);
-            display: flex;
-            justify-content: center;
-        }
-
-        .chat-column div {
-            background-color: #D9D9D9;
-            font-family: 'ABeeZee', sans-serif;
-            border-radius: 50%;
-            box-shadow: 0 3px 8px rgb(0, 0, 0, 0.6);
-        }
-
-        .chat-column input {
-            border-radius: 64px;
-            height: 32px;
-            border: none;
-            background-color: #D9D9D9;
-            padding-left: 8px;
-            width: 512px;
-        }
-
-        .chat-column img {
-            width: 24px;
-            height: 24px;
-        }
-
-        .chat-column table {
-            margin-left: 256px;
-            border-collapse: collapse;
-        }
-
-        .chat-column td {
-            padding: 8px;
-        }
-
-        #chat-receiver {
-            background-color: #ffffff;
-            border-radius: 0px 8px 8px 8px;
-            color: rgb(0, 0, 0);
-            box-shadow: 0 2px 4px rgb(0, 0, 0, 0.4);
-            padding-right: 8px;
-            padding-left: 8px;
-        }
-
-        #chat-receiver,
-        #chat-sender {
-            max-width: 360px;
-        }
-
-        #chat-sender {
-            background-color: #96858F;
-            border-radius: 8px 0px 8px 8px;
-            color: white;
-            box-shadow: 0 2px 4px rgb(0, 0, 0, 0.4);
-            padding-right: 8px;
-            padding-left: 8px;
-        }
-
-        .image-user img {
-            width: 40px;
-            height: 40px;
-        }
-
-        .image-user h5 {
-            margin-left: 4px;
-            font-family: 'ABeeZee', sans-serif;
-        }
-
-        #logo {
-            width: 56px;
-        }
-
-        .main-background {
-            background-color: #D5D5D5;
-        }
-
-        .main-sidebar {
-            background-color: #673A54;
-        }
-
-        @media (max-width: 768px) {
-            .chat-column input {
-                border-radius: 64px;
-                height: 32px;
-                border: none;
-                background-color: #D9D9D9;
-                padding-left: 8px;
-                width: 256px;
-            }
-
-            .chat-column table {
-                margin-left: 4px;
-                border-collapse: collapse;
-            }
-        }
-
-        #minimize,
-        #file-chat {
-            width: 32px;
-            height: 32px;
-            display: flex;
-            justify-content: center;
-            padding-top: 4px;
-            cursor: pointer;
-        }
-
-        #send-chat {
-            width: 32px;
-            height: 32px;
-            justify-content: center;
-            padding-top: 4px;
-            cursor: pointer;
-            display: none;
-        }
-
-        #minimize:hover,
-        #file-chat:hover,
-        #send-chat:hover {
-            background-color: white;
-        }
-
-        #search-button {
-            background-color: #96858F;
-            border: none;
-            border-radius: 4px;
-        }
-
-        #search-column {
-            font-family: 'ABeeZee', sans-serif;
-            padding-left: 8px;
-        }
-
-        #content-chat {
-            font-family: 'ABeeZee', sans-serif;
-            overflow: auto;
-            margin-top: 80px;
-            margin-bottom: 40px;
-        }
-
-        #sender:hover,
-        #receiver:hover {
-            #date-time {
-                color: black;
-            }
-
-            #delete-chat div,
-            #edit-chat div {
-                display: block;
-            }
-
-            #delete-chat {
-                background-color: #673A54;
-                box-shadow: 0 2px 4px rgb(0, 0, 0, 0.4);
-                cursor: pointer;
-            }
-
-            #edit-chat {
-                background-color: #AC608D;
-                box-shadow: 0 2px 4px rgb(0, 0, 0, 0.4);
-                cursor: pointer;
-            }
-        }
-
-        #receiver td {
-            padding-right: 4px;
-            padding-left: 4px;
-        }
-
-        #sender {
-            display: flex;
-            justify-content: flex-end;
-            border-collapse: collapse;
-        }
-
-        #sender td {
-            padding-right: 4px;
-            padding-left: 4px;
-        }
-
-        #sender img,
-        #receiver img {
-            width: 32px;
-            height: 32px;
-        }
-
-        #sender #user-chat {
-            text-align: right;
-        }
-
-        #user-chat {
-            font-size: 13px;
-        }
-
-        #date-time {
-            font-size: 13px;
-            color: #D5D5D5;
-        }
-
-        #edit-chat {
-            background-color: transparent;
-            border-radius: 32px;
-        }
-
-        #edit-chat img:hover,
-        #delete-chat img:hover {
-            width: 26px;
-            height: 26px;
-        }
-
-        #edit-chat img,
-        #delete-chat img {
-            width: 24px;
-            height: 24px;
-        }
-
-        #delete-chat {
-            background-color: transparent;
-            border-radius: 32px;
-        }
-
-        #delete-chat div,
-        #edit-chat div {
-            display: none;
-        }
-
-        .user-list {
-            background-color: white;
-            border-radius: 8px;
-            margin-bottom: 4px;
-            cursor: pointer;
-        }
-
-        .active {
-            background-color: #AC608D;
-        }
-
-    </style>
+    {{-- Import Style Live Chat CSS --}}
+    <link rel="stylesheet" href="{{asset('static/css/style-live-chat.css')}}">
 
     <script>
         let enabled = false;
@@ -360,7 +105,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4" data-widget="false">
             <!-- Brand Logo -->
             <a href="" class="brand-link">
-                <img src="{{asset(Auth::user()->photo_profile)}}" alt="AdminLTE Logo"
+                <img src="{{asset('storage/'.Auth::user()->photo_profile)}}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Admin</span>
             </a>
@@ -387,7 +132,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <ul class="nav">
+                            <ul class="nav" id="list-user">
                                 @if (Auth::user()->id > 1)
 
                                 <li class="nav-item user-list active" user-id="{{ $users->id }}">
@@ -395,7 +140,7 @@
                                         <i class="fa fa-user nav-icon text-dark" data-toggle="tooltip"
                                             data-placement="right" title="{{ $users->name }}"></i>
                                         <span class="mr-1">{{ $users->name }}</span>
-                                        {{-- <span class="badge badge-info">5</span> --}}
+                                        <span class="badge badge-info" id="chat-notif-{{ $users->id }}"></span>
                                     </a>
                                 </li>
 
@@ -411,7 +156,7 @@
                                         <i class="fa fa-user nav-icon text-light" data-toggle="tooltip"
                                             data-placement="right" title="{{ $user->name }}"></i>
                                         <span class="mr-1">{{ $user->name }}</span>
-                                        {{-- <span class="badge badge-info">5</span> --}}
+                                        <span class="badge badge-info" id="chat-notif-{{ $user->id }}"></span>
                                     </a>
                                 </li>
 
@@ -423,7 +168,7 @@
                                         <i class="fa fa-user nav-icon text-dark" data-toggle="tooltip"
                                             data-placement="right" title="{{ $user->name }}"></i>
                                         <span class="mr-1">{{ $user->name }}</span>
-                                        {{-- <span class="badge badge-info">5</span> --}}
+                                        <span class="badge badge-info" id="chat-notif-{{ $user->id }}"></span>
                                     </a>
                                 </li>
 

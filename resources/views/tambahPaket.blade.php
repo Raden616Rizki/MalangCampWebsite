@@ -24,7 +24,7 @@
                             <td>
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="{{asset($it->gambar)}}" class="img-fluid rounded-start"
+                                        <img src="{{asset('storage/static/image_item/'.$it->gambar)}}" class="img-fluid rounded-start"
                                             style="height:80px; border-radius:20px; margin-left:13px; margin-top:17px; margin-bottom:10px;">
                                     </div>
                                     <div class="col-md-8">
@@ -33,10 +33,7 @@
                                                 style="width: 300px;border-radius:20px; margin-left:-70px; font-size:14px;">
                                                 <strong>{{$it->nama_item}}</strong>
                                                 <br>
-                                                Tenda berkualitas dengan bahan parasut, ukuran 300 x 250. Nyaman,
-                                                dingin,
-                                                anti badai dan
-                                                nyaman seperti pelukan mantan
+                                                {{ $it->keterangan }}
                                             </h5>
                                         </div>
                                     </div>
@@ -94,8 +91,8 @@
                         </table>
                     </div>
                     <div class="mt-2">
-                        <button type="button" class="btn btn-outline-light"
-                            style="background-color:#AC608D; padding-right: 32px; padding-left: 32px; color: white; margin-right: 16px;">Cancel</button>
+                        <a type="button" class="btn btn-outline-light" href="{{ route('paket.index') }}"
+                            style="background-color:#AC608D; padding-right: 32px; padding-left: 32px; color: white; margin-right: 16px;">Cancel</a>
                         <button type="submit" class="btn btn-outline-light"
                             style="background-color:#673A54; padding-right: 38px; padding-left: 38px; color: white;">Save</button>
                     </div>

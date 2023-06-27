@@ -7,6 +7,8 @@ use App\Models\kelolaBarangs;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\KelolaBarang;
+use App\Models\laporanBarang_pdf;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class KelolaBarangController extends Controller
 {
@@ -15,10 +17,21 @@ class KelolaBarangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kelolaBarang = KelolaBarangs::paginate(2);
-        return view('kelolaBarang', compact(('kelolaBarang')));
+
+        if($request->has('search-input')) {
+            $key = request('search-input');
+            // $kelolaBarang = KelolaBarang::where('nama_item', 'LIKE', '%'.$key.'%')->paginate(2);
+            $kelolaBarang = kelolaBarangs::where('nama_item', 'LIKE', '%'.$key.'%')
+            ->orWhere('jenis', 'LIKE', '%'.$key.'%')
+            ->orWhere('keterangan', 'LIKE', '%'.$key.'%')
+            ->paginate(2);
+            return view('kelolaBarang', compact(('kelolaBarang')));
+        } else {
+            $kelolaBarang = kelolaBarangs::orderBy('id_item', 'desc')->paginate(2);
+            return view('kelolaBarang', compact(('kelolaBarang')));
+        }
     }
 
     /**
@@ -54,7 +67,7 @@ class KelolaBarangController extends Controller
             $gambarNama = time() . '_' . $gambar->getClientOriginalName();
 
             // Pindahkan gambar ke direktori yang diinginkan
-            $gambar->move(public_path('storage/static/image'), $gambarNama);
+            $gambar->move(public_path('storage/static/image_item'), $gambarNama);
         }
 
         // Fungsi eloquent untuk menambah data
@@ -129,7 +142,7 @@ class KelolaBarangController extends Controller
             $gambarNama = time() . '_' . $gambar->getClientOriginalName();
 
             // Pindahkan gambar ke direktori yang diinginkan
-            $gambar->move(public_path('storage/static/image'), $gambarNama);
+            $gambar->move(public_path('storage/static/image_item'), $gambarNama);
             $kelolaBarang->gambar = $gambarNama;
         }
 
@@ -152,7 +165,7 @@ class KelolaBarangController extends Controller
 
         // Hapus gambar dari direktori jika ada
         if ($kelolaBarang->gambar) {
-            $gambarPath = public_path('storage/static/image') . '/' . $kelolaBarang->gambar;
+            $gambarPath = public_path('storage/static/image_item') . '/' . $kelolaBarang->gambar;
             if (file_exists($gambarPath)) {
                 unlink($gambarPath);
             }
@@ -164,4 +177,10 @@ class KelolaBarangController extends Controller
         return redirect()->route('kelolaBarang.index')->with('success', 'Item Berhasil Dihapus');
     }
 
+
+    public function cetak_pdf(){
+        $KelolaBarang = kelolaBarangs::all();
+        $pdf = PDF::loadview('laporanBarang_pdf',['KelolaBarang'=>$KelolaBarang]);
+        return $pdf->stream();
+    }
 }

@@ -94,6 +94,8 @@ Route::post('register', [RegisterController::class, 'register'])->name('register
 
 Route::get('/laporanPaket/cetak_pdf', [PaketController::class, 'cetak_pdf'])->name('cetak_laporanPaket');
 
+Route::get('/laporanBarang/cetak_pdf', [KelolaBarangController::class, 'cetak_pdf'])->name('cetak_laporanBarang');
+
 Route::resource('paket', PaketController::class);
 
 Route::get('/otp', [OTPController::class, 'show'])->name('verification-get');

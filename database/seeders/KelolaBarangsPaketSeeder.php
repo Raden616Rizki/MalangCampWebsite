@@ -17,39 +17,39 @@ class KelolaBarangsPaketSeeder extends Seeder
     {
         $data = [
             [
-                'id_item'=> 28,
+                'id_item'=> 1,
                 'paket_id'=> 1,
             ],
             [
-                'id_item'=> 29,
+                'id_item'=> 2,
                 'paket_id'=> 1,
             ],
             [
-                'id_item'=> 30,
+                'id_item'=> 3,
                 'paket_id'=> 1,
             ],
             [
-                'id_item'=> 31,
+                'id_item'=> 4,
                 'paket_id'=> 1,
             ],
             [
-                'id_item'=> 32,
+                'id_item'=> 5,
                 'paket_id'=> 2,
             ],
             [
-                'id_item'=> 33,
+                'id_item'=> 6,
                 'paket_id'=> 2,
             ],
             [
-                'id_item'=> 34,
+                'id_item'=> 7,
                 'paket_id'=> 2,
             ],
             [
-                'id_item'=> 35,
+                'id_item'=> 8,
                 'paket_id'=> 2,
             ],
             [
-                'id_item'=> 36,
+                'id_item'=> 9,
                 'paket_id'=> 2,
             ]
             ];

@@ -1,12 +1,12 @@
 @extends('layout')
-@section('title', 'PaketDetail')
+@section('title', 'Paket Detail')
 @section('content')
 
 <div class="all" style="padding-top:20px; width: 1000px;">
     <div class="d-flex" id="table"
         style=" background-color: #96858F; padding: 25px; border-radius: 35px; margin-left:20px; width: 1030px; max-width: 1050px; min-width: 300px;">
         <div class="bg2"
-            style="background-color: #B5AAB1; padding: 25px; border-radius: 35px; margin-left:5px; width: 100%; max-width: 750px; min-width: 300px;">
+            style="background-color: #B5AAB1; padding: 25px; border-radius: 35px 0px 0px 35px; margin-left:5px; width: 100%; max-width: 750px; min-width: 300px; overflow: auto; height:500px;">
 
             @foreach($Paket->kelola_barangs as $item)
 
@@ -17,7 +17,7 @@
                         <td>
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="{{asset($item->gambar)}}" class="img-fluid rounded-start"
+                                    <img src="{{asset('storage/static/image_item/'.$item->gambar)}}" class="img-fluid rounded-start"
                                         style="height:80px; border-radius:20px; margin-left:13px; margin-top:17px; margin-bottom:10px;">
                                 </div>
                                 <div class="col-md-8">
@@ -26,9 +26,7 @@
                                             style="width: 300px;border-radius:20px; margin-left:-70px; font-size:14px;">
                                             <strong>{{ $item->nama_item }}</strong>
                                             <br>
-                                            Meja Portable dengan ukuran 200 x 1500 cm. Alas meja yang telah dilapisi
-                                            bahan
-                                            berkualitas anti lemes dan gosip tetangga.
+                                            {{ $item->keterangan }}
                                         </h5>
                                     </div>
                                 </div>

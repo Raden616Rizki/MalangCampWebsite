@@ -47,6 +47,7 @@
                             <table>
                                 <tr>
                                     <td>
+                                        @if (Auth::user()->id > 1)
                                         <form id="deleteForm" action="/data/{{Auth::user()->id}}" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -78,6 +79,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                     </td>
                                     <td>
                                         <a class="btn btn-outline-light" style="background-color:#673A54;"

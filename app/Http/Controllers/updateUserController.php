@@ -17,7 +17,7 @@ class updateUserController extends Controller
     }
 
     public function update(Request $request) {
- 
+
         $request->validate([
             'name' => 'required',
             'username' => 'required',
@@ -41,9 +41,9 @@ class updateUserController extends Controller
             Storage::delete('public/'.$user->photo_profile);
         }
 
-        $filename = $request->file('photo_profile')->store('photo_profile', 'public');
+        $filename = $request->file('photo_profile')->store('static/photo_profile/', 'public');
         $user->photo_profile = $filename;
-        
+
         $user->save();
 
         return redirect()->route('account');

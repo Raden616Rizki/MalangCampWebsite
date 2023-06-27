@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'PaketDetail')
+@section('title', 'Paket Detail Member')
 @section('content')
 
 <div class="all" style="padding-top:20px; width: 1000px;">
@@ -17,7 +17,7 @@
                         <td>
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="{{asset($item->gambar)}}" class="img-fluid rounded-start"
+                                    <img src="{{asset('storage/static/image_item/'.$item->gambar)}}" class="img-fluid rounded-start"
                                         style="height:80px; border-radius:20px; margin-left:13px; margin-top:17px; margin-bottom:10px;">
                                 </div>
                                 <div class="col-md-8">
@@ -26,9 +26,7 @@
                                             style="width: 300px;border-radius:20px; margin-left:-70px; font-size:14px;">
                                             <strong>{{ $item->nama_item }}</strong>
                                             <br>
-                                            Meja Portable dengan ukuran 200 x 1500 cm. Alas meja yang telah dilapisi
-                                            bahan
-                                            berkualitas anti lemes dan gosip tetangga.
+                                            {{ $item->keterangan }}
                                         </h5>
                                     </div>
                                 </div>

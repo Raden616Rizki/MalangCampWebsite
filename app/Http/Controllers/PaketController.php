@@ -17,12 +17,18 @@ class PaketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $Pakets = Paket::orderBy('paket_id', 'desc')->paginate(2);
-        // $Pakets = Paket::all()->paginate(5);
-        // dd($Pakets);
-        return view('kelolaPaket', compact('Pakets'));
+        if($request->has('search-input')) {
+            $key = request('search-input');
+            // $Pakets = Paket::orderBy('paket_id', 'desc')->paginate(2);
+            $Pakets = Paket::where('nama_paket', 'LIKE', '%'.$key.'%')->paginate(2);
+            return view('kelolaPaket', compact('Pakets'));
+        } else {
+            // $mahasiswas = Mahasiswa::all(); // Mengambil semua isi tabel
+            $Pakets = Paket::orderBy('paket_id', 'desc')->paginate(2);
+            return view('kelolaPaket', compact('Pakets'));
+        }
     }
 
     /**

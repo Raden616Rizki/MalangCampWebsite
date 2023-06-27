@@ -2,6 +2,12 @@
 
 @section('title', 'Kelola Barang')
 
+@section('search')
+<form action="{{ route('kelolaBarang.index') }}" method="GET" id="search-form">
+    <input class="main shadow" id="search-input" name="search-input" value="{{request('search-input')}}" placeholder="Search" /><span class="searchicon"></span>
+</form>
+@endsection
+
 @section('content')
 
 @if (Auth::user()->id > 1)
@@ -110,7 +116,7 @@
                         @foreach ($kelolaBarang as $KelolaBarang)
                         <div class="box_kelola">
                             <div class="nama">
-                                <img src="{{ asset('storage/static/image/'.$KelolaBarang->gambar) }}" class="box_foto"
+                                <img src="{{ asset('storage/static/image_item/'.$KelolaBarang->gambar) }}" class="box_foto"
                                     alt="">
                                 <div>
                                     <label for="item_id">ID Item</label>
@@ -147,7 +153,7 @@
                                 <div>
                                     <label for="keterangan">Keterangan</label>
                                     <div class="box_isi">
-                                        <div class="isi">
+                                        <div class="isi" style="height: 24px; overflow: auto;">
                                             {{$KelolaBarang->keterangan}}
                                         </div>
                                     </div>
@@ -156,7 +162,7 @@
                                     <label for="harga">Harga</label>
                                     <div class="box_isi">
                                         <div class="isi">
-                                            {{$KelolaBarang->harga}}
+                                            Rp{{$KelolaBarang->harga}}
                                         </div>
                                     </div>
                                 </div>
@@ -187,10 +193,19 @@
                         </div>
                         @endforeach
 
+
+                       
+
+
+
                     </div>
                 </div>
             </div>
         </div>
+        <div>
+        <a class="btn btn-light" style="margin-left:310px; margin-bottom:-80px;"
+                                href="{{ route('cetak_laporanBarang') }}">Cetak</a>
+                                </div>
     </div>
 </div>
 </div>

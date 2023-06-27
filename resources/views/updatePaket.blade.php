@@ -24,7 +24,7 @@
                             <td>
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="{{asset($it->gambar)}}" class="img-fluid rounded-start"
+                                        <img src="{{asset('storage/static/image_item/'.$it->gambar)}}" class="img-fluid rounded-start"
                                             style="height:80px; border-radius:20px; margin-left:13px; margin-top:17px; margin-bottom:10px;">
                                     </div>
                                     <div class="col-md-8">
@@ -33,10 +33,7 @@
                                                 style="width: 300px;border-radius:20px; margin-left:-70px; font-size:14px;">
                                                 <strong>{{$it->nama_item}}</strong>
                                                 <br>
-                                                Tenda berkualitas dengan bahan parasut, ukuran 300 x 250. Nyaman,
-                                                dingin,
-                                                anti badai dan
-                                                nyaman seperti pelukan mantan
+                                                {{ $it->keterangan }}
                                             </h5>
                                         </div>
                                     </div>

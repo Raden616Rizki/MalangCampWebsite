@@ -38,84 +38,84 @@
                             Foto Profil
                             <input id="photo_profile" type="file"
                                 class="form-control @error('photo_profile') is-invalid @enderror" name="photo_profile"
-                                placeholder="" {{--required autocomplete="photo_profile" autofocus--}}
-                                style="margin-left:18vh; border:none; width:18vh; height:18vh; border-radius:18px;"
+                                placeholder="" required autocomplete="photo_profile" autofocus
+                                style="margin-left:18vh; border:none; width:18vh; height:18vh; border-radius:18px; background-image: url('{{asset('storage/'.Auth::user()->photo_profile)}}'); background-size: cover; background-position: center;"
                                 value='{{ Auth::user()->photo_profile }}'>
-                            {{-- @error('photo_profile')
+                            @error('photo_profile')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror --}}
+                            @enderror
                         </div>
                         <div class="kolom">
                             Username <input
                                 id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username"--}}
-                                placeholder="" {{--required autocomplete="username" autofocus
+                                placeholder="Input Your Username" required autocomplete="username" autofocus
                                 style="margin-left:5vh;" value='{{ Auth::user()->username }}'>
 
-                            {{-- @error('username')
+                            @error('username')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror --}}
+                            @enderror
                         </div>
 
                         <div class="kolom">
                             Your Name
                             <input
                                 id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                                placeholder="" {{--required autocomplete="name" autofocus--}} style="margin-left:4vh;"
+                                placeholder="Input Your Name" required autocomplete="name" autofocus style="margin-left:4vh;"
                                 value='{{ Auth::user()->name }}'>
 
-                            {{-- @error('name')
+                            @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror --}}
+                            @enderror
                         </div>
 
                         <div class="kolom">
                             Email
                             <input
                                 id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email"
-                                placeholder="" {{--required autocomplete="email" autofocus--}} style="margin-left:10vh;"
+                                placeholder="Input Your Email" required autocomplete="email" autofocus style="margin-left:10vh;"
                                 value='{{ Auth::user()->email }}'>
 
-                            {{-- @error('email')
+                            @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror --}}
+                            @enderror
                         </div>
 
                         <div class="kolom">
                             NoHP
                             <input
                                 id="phoneNumber" type="text" class="form-control @error('phoneNumber') is-invalid @enderror" name="phoneNumber"--}}
-                                placeholder="" {{--required autocomplete="phoneNumber" autofocus
+                                placeholder="Input Your PhoneNumber" required autocomplete="phoneNumber" autofocus
                                 style="margin-left:10vh;" value="{{ Auth::user()->phoneNumber }}">
 
-                            {{-- @error('phoneNumber')
+                            @error('phoneNumber')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                                @enderror --}}
+                                @enderror
                         </div>
 
                         <div class="kolom">
                             Address
                             <input
                                 id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address"--}}
-                                placeholder="" {{--required autocomplete="address" autofocus
+                                placeholder="Input Your Address" required autocomplete="address" autofocus
                                 style="margin-left:7vh;" value='{{ Auth::user()->address }}'>
 
-                            {{-- @error('address')
+                            @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror --}}
+                            @enderror
                         </div>
-                    <div class="button-cncl-updt" style="margin-left:20vh">
+                    <div class="button-cncl-updt mt-2" style="margin-left:20vh">
                         <a href="/account" class="btn btn-outline-light" style="background-color:#AC608D;">Cancel</a>
                         <button type="submit" class="btn btn-outline-light" style="background-color:#673A54;">Update</a>
                     </div>
