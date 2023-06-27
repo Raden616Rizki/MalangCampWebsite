@@ -1,5 +1,6 @@
 @extends('layout')
 @section('title', 'Kelola Pesanan')
+
 @section('content')
     <div class="box-pesanan" style="padding-top: 3vh;">
         <center style="font-family: 'ABeeZee'; font-style: normal;font-weight: 400;font-size: 22px;line-height: 26px;color: #000000;">
@@ -23,7 +24,7 @@
                             <td>{{ $item->jenis}} </td>
                             <td>{{ $pesanan->tanggal_peminjaman}} - {{ $pesanan->tanggal_kembali}}</td>
                             <td>{{ $item->harga}} </td>
-                            <td><img src="{{ $item->gambar}}" alt="" style="width:10vh; height:10vh;"></td>
+                            <td><img src="{{asset('storage/static/image_item/'.$item->gambar)}}" alt="" style="width:10vh; height:10vh;"></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -32,7 +33,7 @@
                 <div class="catatan" style="font-size:10px;font-family: 'Font Awesome 5 Brands';font-style: normal;color: #FFFFFF;margin-left:2vh; padding-top:1vh; list-style:none;">
                     <li>Catatan : {{$pesanan->catatan}}</li>
                     <li>Total   :  Rp {{$pesanan->total}}</li>
-                    <li>Bukti   : <img src="{{$pesanan->gambar}}" alt="belum melakukan pembayaran"></li>
+                    <li>Bukti   : <img src="{{asset('storage/static/image_item/'.$pesanan->gambar)}}" alt="belum melakukan pembayaran"></li>
                 </div>
                 <div class="tombol">
                     <form action="{{route('keranjang.update', $pesanan->pesanan_id)}}" method="POST">

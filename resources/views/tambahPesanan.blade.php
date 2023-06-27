@@ -12,7 +12,7 @@
                 <div class="card" style="width: 18rem; background: rgba(255, 255, 255, 0.5);
                 box-shadow: 6px 0px 10px rgba(0, 0, 0, 0.25);
                 border-radius: 30px;">
-                    <img class="card-img-top" src="{{ asset($product->gambar) }}" alt="Card image cap" style="width: 15vh; height:15vh; margin-left:33%;">
+                    <img class="card-img-top" src="{{ asset('storage/static/image_item/'.$product->gambar) }}" alt="Card image cap" style="width: 15vh; height:15vh; margin-left:33%;">
                     {{-- {{dd(asset($product->gambar))}} --}}
                     <div class="card-body">
                         <ul style="list-style: none; text-align:center;">

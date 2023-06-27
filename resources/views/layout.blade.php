@@ -168,10 +168,10 @@
                     <a href="/paket" class="nav-link header-link">Paket</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/kelolaPesanan" class="nav-link">Order</a>
+                    <a href="/kelolaPesanan" class="nav-link header-link">Order</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/laporanTransaksi" class="nav-link">Report</a>
+                    <a href="/laporanTransaksi" class="nav-link header-link">Report</a>
                 </li>
                 @endif
                 <li class="nav-item d-none d-sm-inline-block">

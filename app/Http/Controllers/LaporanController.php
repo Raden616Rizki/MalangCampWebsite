@@ -15,11 +15,20 @@ class LaporanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-    $pesanan = KelolaPesanan::all();
 
-    return view('laporanTransaksi', compact('pesanan'));
+        if($request->has('search-input')) {
+            $key = request('search-input');
+            $pesanan = KelolaPesanan::where('status_pembayaran', 'LIKE', '%'.$key.'%')
+            ->orWhere('status_order', 'LIKE', '%'.$key.'%')
+            ->paginate(4);
+            return view('laporanTransaksi', compact('pesanan'));
+        } else {
+            $pesanan = KelolaPesanan::orderBy('pesanan', 'desc')->paginate(4);
+            return view('laporanTransaksi', compact('pesanan'));
+
+        }
     }
 
 
@@ -50,10 +59,20 @@ class LaporanController extends Controller
      * @param  \App\Models\KelolaPesanan  $kelolaPesanan
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
     {
         $pesanan = KelolaPesanan::with('kelolaBarangs')->get();
-        return view('laporanTransaksi', compact('pesanan'));
+        if($request->has('search-input')) {
+            $key = request('search-input');
+            $pesanan = KelolaPesanan::where('status_pembayaran', 'LIKE', '%'.$key.'%')
+            ->orWhere('status_order', 'LIKE', '%'.$key.'%')
+            ->paginate(4);
+            return view('laporanTransaksi', compact('pesanan'));
+        } else {
+            $pesanan = KelolaPesanan::orderBy('pesanan', 'desc')->paginate(4);
+            return view('laporanTransaksi', compact('pesanan'));
+
+        }
     }
 
     /**

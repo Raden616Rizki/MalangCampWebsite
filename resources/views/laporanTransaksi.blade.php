@@ -2,6 +2,12 @@
 
 @section('title', 'Laporan Transaksi')
 
+@section('search')
+<form action="laporanTransaksi" method="GET" id="search-form">
+    <input class="main shadow" id="search-input" name="search-input" value="{{request('search-input')}}" placeholder="Search" /><span class="searchicon"></span>
+</form>
+@endsection
+
 @section('content')
 <div class="laporan-transaksi" style="padding-top: 3vh;">
     <center style="font-family: 'ABeeZee'; font-style: normal;font-weight: 400;font-size: 22px;line-height: 26px;color: #000000;">Laporan Transaksi</center>
