@@ -72,23 +72,24 @@
     });
 
     function deletePesanan(pesanan_id) {
-        // console.log(pesanan_id);
-        let csrfToken = $('meta[name="csrf-token"]').attr('content');
+    let csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            }
-        });
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': csrfToken
+        }
+    });
 
-        $.ajax({
+    $.ajax({
         type: 'DELETE',
         url: `/laporan/${pesanan_id}`,
         data: {},
         success: function(response) {
+            window.location.href = "/laporanTransaksi";
         },
-        });
-    }
+    });
+}
+
 </script>
 
 @endsection
