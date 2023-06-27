@@ -44,11 +44,11 @@
                                 style="height:23px; width: 300px; background-color:white; border-radius:20px; padding-left:8px;">
                                 <strong>{{$paket->harga_paket}}</strong></h6>
                             <div>
-                                <button type="button" class="btn btn-outline-light"
+                                <!-- <button type="button" class="btn btn-outline-light"
                                     style="background-color:#96858F;">Pesan</button>
                                 <button type="button" class="btn btn-outline-light"
                                     style="background-color:#AC608D;">Add to
-                                    Cart</button>
+                                    Cart</button> -->
                                 <a type="button" class="btn btn-outline-light" style="background-color:#673A54;"
                                 href="/paketMember/{{ $paket->paket_id }}">Detail</a>
                             </div>
