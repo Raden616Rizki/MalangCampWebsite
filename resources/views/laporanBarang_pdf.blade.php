@@ -32,7 +32,7 @@ table, th, td {
                 <th>Stok</th>
                 <th>Jenis</th>
                 <th>Harga</th>
-                <th>Gambar</th>
+                <!-- <th>Gambar</th> -->
             </tr>
         </thead>
         <tbody>
@@ -44,7 +44,7 @@ table, th, td {
                 <td>{{$a->jenis}}</td>
                 <td>{{$a->harga}}</td>
                 <!-- <td>{{$a->image_paket}}</td> -->
-                <td><img width="100px" src="{{ storage_path('app/public/'.$a->gambar) }}"></td>
+                <!-- <td><img width="100px" src="{{ storage_path('storage/static/image_item/'.$a->gambar) }}"></td> -->
             </tr>
             @endforeach
         </tbody>
