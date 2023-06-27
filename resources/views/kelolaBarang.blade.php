@@ -80,7 +80,7 @@
             </form>
         </div>
     </div>
-    <div class="box_list">
+    <div class="box_list" style="height:560px;">
         <div>
             <div>
                 <div class="pagination d-flex">
@@ -192,19 +192,12 @@
                             </div>
                         </div>
                         @endforeach
-
-
-                       
-
-
-
                     </div>
                 </div>
             </div>
         </div>
         <div>
-        <a class="btn btn-light" style="margin-left:310px; margin-bottom:-80px;"
-                                href="{{ route('cetak_laporanBarang') }}">Cetak</a>
+        <a target="_blank" class="btn btn-light" style="margin-left:310px; margin-bottom:-120px;" href="{{ route('cetak_laporanBarang') }}">Cetak</a>
                                 </div>
     </div>
 </div>
