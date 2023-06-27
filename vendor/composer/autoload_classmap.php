@@ -21,6 +21,7 @@ return array(
     'App\\Http\\Controllers\\DataController' => $baseDir . '/app/Http/Controllers/DataController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\KelolaBarangController' => $baseDir . '/app/Http/Controllers/KelolaBarangController.php',
+
     'App\\Http\\Controllers\\KeranjangController' => $baseDir . '/app/Http/Controllers/KeranjangController.php',
     'App\\Http\\Controllers\\LiveChatController' => $baseDir . '/app/Http/Controllers/LiveChatController.php',
     'App\\Http\\Controllers\\OTPController' => $baseDir . '/app/Http/Controllers/OTPController.php',
@@ -30,6 +31,7 @@ return array(
     'App\\Http\\Controllers\\TambahPesananController' => $baseDir . '/app/Http/Controllers/TambahPesananController.php',
     'App\\Http\\Controllers\\TransaksiController' => $baseDir . '/app/Http/Controllers/TransaksiController.php',
     'App\\Http\\Controllers\\updateUserController' => $baseDir . '/app/Http/Controllers/updateUserController.php',
+
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
@@ -40,18 +42,26 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\ValidateSignature' => $baseDir . '/app/Http/Middleware/ValidateSignature.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+
+    'App\\Models\\Cart' => $baseDir . '/app/Models/Cart.php',
+    'App\\Models\\KelolaPesanan' => $baseDir . '/app/Models/KelolaPesanan.php',
+    'App\\Models\\Transaksi' => $baseDir . '/app/Models/Transaksi.php',
+
     'App\\Http\\Requests\\StoreChatRequests' => $baseDir . '/app/Http/Requests/StoreChatRequests.php',
     'App\\Http\\Requests\\UpdateChatRequests' => $baseDir . '/app/Http/Requests/UpdateChatRequests.php',
     'App\\Http\\Resources\\ChatResource' => $baseDir . '/app/Http/Resources/ChatResource.php',
+
     'App\\Mail\\OtpMail' => $baseDir . '/app/Mail/OtpMail.php',
-    'App\\Models\\Cart' => $baseDir . '/app/Models/Cart.php',
+    // 'App\\Models\\Cart' => $baseDir . '/app/Models/Cart.php',
     'App\\Models\\Chat' => $baseDir . '/app/Models/Chat.php',
     'App\\Models\\Items_Pesanan' => $baseDir . '/app/Models/Items_Pesanan.php',
+
     'App\\Models\\KelolaBarang' => $baseDir . '/app/Models/KelolaBarang.php',
     'App\\Models\\KelolaBarangsPaket' => $baseDir . '/app/Models/KelolaBarangsPaket.php',
-    'App\\Models\\KelolaPesanan' => $baseDir . '/app/Models/KelolaPesanan.php',
+
+    // 'App\\Models\\KelolaPesanan' => $baseDir . '/app/Models/KelolaPesanan.php',
     'App\\Models\\Paket' => $baseDir . '/app/Models/Paket.php',
-    'App\\Models\\Transaksi' => $baseDir . '/app/Models/Transaksi.php',
+    // 'App\\Models\\Transaksi' => $baseDir . '/app/Models/Transaksi.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\kelolaBarangs' => $baseDir . '/app/Models/kelolaBarangs.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
@@ -178,6 +188,7 @@ return array(
     'Database\\Seeders\\KelolaBarangsPaketSeeder' => $baseDir . '/database/seeders/KelolaBarangsPaketSeeder.php',
     'Database\\Seeders\\PaketSeeder' => $baseDir . '/database/seeders/PaketSeeder.php',
     'Database\\Seeders\\UserSeeder' => $baseDir . '/database/seeders/UserSeeder.php',
+    'Database\\Seeders\\UsersSeeder' => $baseDir . '/database/seeders/UsersSeeder.php',
     'DeepCopy\\DeepCopy' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
     'DeepCopy\\Exception\\CloneException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
     'DeepCopy\\Exception\\PropertyException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/PropertyException.php',

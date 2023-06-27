@@ -5,48 +5,60 @@
         <center style="font-family: 'ABeeZee'; font-style: normal;font-weight: 400;font-size: 22px;line-height: 26px;color: #000000;">
             Kelola Pesanan
         </center>
+        @foreach($pesanans as $pesanan)
         <div class="box-kelolaPesanan">
+            <h6 style="font-size:10px;font-family: 'ABeeZee';font-style: normal;font-weight: 400; margin-left:2vh; padding-top:1vh;color: #FFFFFF;">{{ $pesanan->user->name }}</h6>
+            <hr style="background-color: white">
             <table class="tabel-kelola-pesanan">
-                <h6 style="font-size:10px;font-family: 'ABeeZee';font-style: normal;font-weight: 400; margin-left:2vh; padding-top:1vh;color: #FFFFFF;">{{-- $pesanan->user->nama --}}(nama)</h6>
-                <hr style="background-color: white">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
                 <tbody style="font-family: 'Font Awesome 5 Brands';font-style: normal;color:#FFFFFF;">
-                    {{-- @foreach($kelola_barangs_pesanan as $p) --}}
                     <tr>
-                        <td>{{--{{ $p->items->nama_item}}--}}nama_item</td>
-                        <td>{{--{{ $p->jumlah_item}}--}}pcs</td>
-                        <td>{{--{{ $p->pesanan->tanggal_peminjaman}}--}}00/00/0000 - {{--{{ $p->pesanan->tanggal_kembali}}--}}00/00/0000</td>
-                        <td>{{--{{ $p->items->harga}}--}}Rp</td>
-                        <td style="text-align:right">{{--{{ $p->pesanan->total}}--}}Rp</td>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
+                    @foreach($pesanan->kelolaBarangs as $item)
+                        <tr>
+                            <td>{{ $item->nama_item }} </td>
+                            <td>{{ $item->jenis}} </td>
+                            <td>{{ $pesanan->tanggal_peminjaman}} - {{ $pesanan->tanggal_kembali}}</td>
+                            <td>{{ $item->harga}} </td>
+                            <td><img src="{{ $item->gambar}}" alt="" style="width:10vh; height:10vh;"></td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
             <div class="kolom-bawah">
-                <div class="catatan" style="font-size:10px;font-family: 'Font Awesome 5 Brands';font-style: normal;font-weight: 400;line-height: 23px;color: #FFFFFF;margin-left:2vh; padding-top:1vh;">
-                    Catatan : {{--$pesanan->catatan--}}(catatan dari user)
+                <div class="catatan" style="font-size:10px;font-family: 'Font Awesome 5 Brands';font-style: normal;color: #FFFFFF;margin-left:2vh; padding-top:1vh; list-style:none;">
+                    <li>Catatan : {{$pesanan->catatan}}</li>
+                    <li>Total   :  Rp {{$pesanan->total}}</li>
+                    <li>Bukti   : <img src="{{$pesanan->gambar}}" alt="belum melakukan pembayaran"></li>
                 </div>
                 <div class="tombol">
-                    <div class="payment">
-                        <button class="pay" style="background: #FFFFFF;
+                    <form action="{{route('keranjang.update', $pesanan->pesanan_id)}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        {{-- <div class="payment">
+                            <button class="pay" style="background: #FFFFFF;
+                            border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
+                            color: #000000; border:none; width:15vh;">payment</button>
+                        </div> --}}
+                        <select name="status_pembayaran" id="status_pembayaran" style="background: #FFFFFF;
                         border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
-                        color: #000000; border:none;">payment</button>
-                    </div>
-                    <div class="konfirmasi">
-                        <button class="konf" style="background: #FFFFFF;
-                        border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
-                        color: #000000; border:none;">konfirmasi</button>
-                        {{-- p --}}
-                    </div>
+                        color: #000000; border:none; margin-left:1vh; height:4vh;">
+                            <option value="belum bayar" {{ $pesanan->status_pembayaran == 'belum bayar' ? 'selected' : '' }}>Belum Bayar</option>
+                            <option value="lunas" {{ $pesanan->status_pembayaran == 'lunas' ? 'selected' : '' }}>Lunas</option>
+                            <option value="dp" {{ $pesanan->status_pembayaran == 'dp' ? 'selected' : '' }}>DP</option>
+                        </select>
+                        <div class="konfirmasi">
+                            <button type="submit" class="konf" style="background: #FFFFFF;
+                            border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
+                            color: #000000; border:none; width:15vh;">{{ __('Kirim') }}</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 @endsection

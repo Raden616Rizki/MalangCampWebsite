@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\kelolaBarangs;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\KelolaBarang;
@@ -18,16 +19,17 @@ class KelolaBarangController extends Controller
      */
     public function index(Request $request)
     {
+
         if($request->has('search-input')) {
             $key = request('search-input');
             // $kelolaBarang = KelolaBarang::where('nama_item', 'LIKE', '%'.$key.'%')->paginate(2);
-            $kelolaBarang = KelolaBarang::where('nama_item', 'LIKE', '%'.$key.'%')
+            $kelolaBarang = kelolaBarangs::where('nama_item', 'LIKE', '%'.$key.'%')
             ->orWhere('jenis', 'LIKE', '%'.$key.'%')
             ->orWhere('keterangan', 'LIKE', '%'.$key.'%')
             ->paginate(2);
             return view('kelolaBarang', compact(('kelolaBarang')));
         } else {
-            $kelolaBarang = KelolaBarang::orderBy('id_item', 'desc')->paginate(2);
+            $kelolaBarang = kelolaBarangs::orderBy('id_item', 'desc')->paginate(2);
             return view('kelolaBarang', compact(('kelolaBarang')));
         }
     }
@@ -69,7 +71,7 @@ class KelolaBarangController extends Controller
         }
 
         // Fungsi eloquent untuk menambah data
-        $kelolaBarang = new KelolaBarang();
+        $kelolaBarang = new KelolaBarangs();
         $kelolaBarang->id_item = $request->id_item;
         $kelolaBarang->nama_item = $request->nama_item;
         $kelolaBarang->stok = $request->stok;
@@ -105,7 +107,7 @@ class KelolaBarangController extends Controller
      */
     public function edit($id)
     {
-        $kelolaBarang = KelolaBarang::findOrFail($id);
+        $kelolaBarang = KelolaBarangs::findOrFail($id);
         return view('editKelolaBarang', compact('kelolaBarang'));
     }
 
@@ -127,7 +129,7 @@ class KelolaBarangController extends Controller
             'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $kelolaBarang = KelolaBarang::findOrFail($id);
+        $kelolaBarang = kelolaBarangs::findOrFail($id);
         $kelolaBarang->id_item = $request->id_item;
         $kelolaBarang->nama_item = $request->nama_item;
         $kelolaBarang->stok = $request->stok;
@@ -159,7 +161,7 @@ class KelolaBarangController extends Controller
     public function destroy($id)
     {
         // Temukan data barang yang ingin dihapus
-        $kelolaBarang = KelolaBarang::find($id);
+        $kelolaBarang = KelolaBarangs::find($id);
 
         // Hapus gambar dari direktori jika ada
         if ($kelolaBarang->gambar) {
@@ -175,10 +177,10 @@ class KelolaBarangController extends Controller
         return redirect()->route('kelolaBarang.index')->with('success', 'Item Berhasil Dihapus');
     }
 
+
     public function cetak_pdf(){
-        $KelolaBarang = KelolaBarang::all();
+        $KelolaBarang = kelolaBarangs::all();
         $pdf = PDF::loadview('laporanBarang_pdf',['KelolaBarang'=>$KelolaBarang]);
         return $pdf->stream();
     }
-
 }
