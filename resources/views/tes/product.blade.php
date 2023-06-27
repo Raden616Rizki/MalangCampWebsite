@@ -13,5 +13,5 @@
     </div>
 @endif
 
-<a href="{{ route('cart.show') }}">Lihat Keranjang Belanja</a>
+<a href="{{ route('cartshow') }}">Lihat Keranjang Belanja</a>
 @endsection

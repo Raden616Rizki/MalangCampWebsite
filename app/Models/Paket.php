@@ -12,8 +12,8 @@ use Illuminate\Notifications\Notifiable;
 class Paket extends Model
 {
     // use HasFactory;
-    protected $table="paket"; 
-    protected $primaryKey = 'paket_id'; 
+    protected $table="paket";
+    protected $primaryKey = 'paket_id';
 
 
     protected $fillable = [
@@ -23,6 +23,6 @@ class Paket extends Model
         ];
 
         public function kelola_barangs() {
-            return $this->belongsToMany(KelolaBarang::class, "kelola_barangs_paket", "paket_id", "id_item");
+            return $this->belongsToMany(kelolaBarangs::class, "kelola_barangs_paket", "paket_id", "id_item");
         }
 }

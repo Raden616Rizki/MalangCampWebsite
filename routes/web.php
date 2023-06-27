@@ -9,7 +9,8 @@ use App\Http\Controllers\DataController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\KelolaBarangController;
 use App\Http\Controllers\updateUserController;
-use App\Http\Controllers\TambahPesananController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OTPController;
 use App\Http\Controllers\HomeController;
@@ -63,11 +64,11 @@ Route::get('/updatePaket', function () {
     return view('updatePaket');
 });
 
-Route::get('/cart', [App\Http\Controllers\CartController::class, 'show'])->name('cart');
+// Route::get('/cart', [App\Http\Controllers\CartController::class, 'show'])->name('cart');
 
 Route::get('/kelolaPesanan', [App\Http\Controllers\PesananController::class, 'show'])->name('kelolaPesanan');
 
-Route::get('/laporanTransaksi', [App\Http\Controllers\TransaksiController::class, 'show'])->name('laporanTransaksi');
+Route::get('/laporanTransaksi', [App\Http\Controllers\LaporanController::class, 'show'])->name('laporanTransaksi');
 
 // Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class])->name('register');
 
@@ -84,8 +85,6 @@ Route::delete('/data/{id}', [DataController::class, 'destroy'])->name('data.dest
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('kelolaBarang', KelolaBarangController::class);
-
-Route::resource('/tambahPesanan', TambahPesananController::class);
 
 // Route::get('/tambahPesanan', function () {
 //     return view('tambahPesanan');
@@ -105,10 +104,36 @@ Route::post('/otp', [OTPController::class, 'verify'])->name('verification-post')
 Route::get('/live-chat/{user_id}', [LiveChatController::class, 'index']);
 
 Route::post('/cart/add',[KeranjangController::class, 'addToCart'])->name('cart.add');
-Route::get('/show-cart', [KeranjangController::class,'showCart'])->name('cart.show');
+Route::get('/cart', [KeranjangController::class,'showCart'])->name('cart.show');
 Route::get('/test-cart', function (){
-    return view('product');
+    return view('tes.product');
 });
 
 Route::get('/update-account', [updateUserController::class, 'edit'])->name('get-account');
 Route::post('/post-account', [updateUserController::class, 'update'])->name('post-account');
+
+//coba routes cart
+Route::get('/tambahPesanan', [KeranjangController::class,'index'])->name('index');
+
+Route::get('cart', [KeranjangController::class,'cart'])->name('cart');
+
+Route::get('cartt', [KeranjangController::class,'cart'])->name('cartt');
+
+Route::get('add-to-cart/{id}', [KeranjangController::class,'addToCart'])->name('addToCart');
+
+Route::patch('update-cart', [KeranjangController::class,'update'])->name('update-cart');
+
+Route::delete('remove-from-cart', [KeranjangController::class,'remove'])->name('remove-from-cart');
+
+Route::resource('keranjang',PesananController::class);
+
+Route::resource('laporan',LaporanController::class);
+
+Route::get('laporan/{pesanan_id}', function () {
+    return view('');
+});
+
+
+
+
+

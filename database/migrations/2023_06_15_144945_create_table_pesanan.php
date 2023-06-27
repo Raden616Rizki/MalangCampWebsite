@@ -19,10 +19,10 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->date('tanggal_peminjaman');
             $table->date('tanggal_kembali');
-            $table->string('bukti_transaksi');
-            $table->string('status_pembayaran');
-            $table->string('catatan');
-            $table->string('status_order');
+            $table->string('bukti_transaksi')->nullable();
+            $table->string('status_pembayaran')->nullable();
+            $table->string('catatan')->nullable();
+            $table->string('status_order')->nullable();
             $table->float('total');
             $table->timestamps();
         });

@@ -128,8 +128,19 @@
                 enabled = false;
             }
         }
-
     </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#status_order').change(function() {
+            let formTransaksi = $('#form-transaksi');
+	        formTransaksi.submit()
+        });
+    });
+</script>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -157,10 +168,10 @@
                     <a href="/paket" class="nav-link header-link">Paket</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/order" class="nav-link header-link">Order</a>
+                    <a href="/kelolaPesanan" class="nav-link header-link">Order</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/report" class="nav-link header-link">Report</a>
+                    <a href="/laporanTransaksi" class="nav-link header-link">Report</a>
                 </li>
                 @endif
                 <li class="nav-item d-none d-sm-inline-block">
@@ -263,6 +274,13 @@
                 <div class="container-fluid">
                     @yield('content')
                 </div>
+
+                @yield('scripts')
+
+                <script>
+               $("a").click(function () {
+                     $(".session").visibility(2);});
+                   </script>
                 <!-- /.container-fluid -->
             </section>
             <footer class="text-center mt-8">

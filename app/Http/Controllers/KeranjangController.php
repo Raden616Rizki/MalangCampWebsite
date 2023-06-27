@@ -11,52 +11,107 @@ class KeranjangController extends Controller
     //
 
 
-    public function addToCart(Request $request)
+    public function index()  // get all data from database
     {
-        $productId = $request->input('product_id');
-        $quantity = $request->input('quantity');
+        $products = kelolaBarangs::paginate(3);
+        return view('tambahPesanan', compact('products'))->with('products', $products);  //  show all data in page of products.blade.php
+    }
 
-        // Ambil data keranjang dari session
-        $cart = Session::get('cart', []);
-
-        // Periksa apakah produk sudah ada di keranjang
-        if (array_key_exists($productId, $cart)) {
-            // Jika sudah ada, tambahkan kuantitasnya
-            $cart[$productId] += $quantity;
-        } else {
-            // Jika belum ada, tambahkan produk baru ke keranjang
-            $cart[$productId] = $quantity;
-        }
-
-        // Simpan kembali data keranjang ke session
-        Session::put('cart', $cart);
-
-        // Redirect ke halaman keranjang belanja atau halaman produk
-        return redirect()->back()->with('success', 'Produk ditambahkan ke keranjang.');
+    // this function is to show cart of product because we wanna show result of choose product by user in this page
+    public function cart()
+    {
+        return view('cart');
     }
 
 
-    public function showCart()
+
+    public function addToCart($id_item)
     {
-        // Ambil data keranjang dari session
-        $cart = Session::get('cart', []);
-    
-        // Ambil ID produk dari keranjang
-        $productIds = array_keys($cart);
-    
-        // Ambil detail produk dari database berdasarkan ID
-        $products = kelolaBarangs::whereIn('id_item', $productIds)->get();
-    
-        // Buat associative array untuk memetakan produk berdasarkan ID
-        $productMap = [];
-        foreach ($products as $product) {
-            $productMap[$product->id] = $product;
+        $product = kelolaBarangs::find($id_item);
+
+        if(!$product) {
+            abort(404);
         }
-    
-        // Tampilkan view keranjang belanja dengan data produk
-        return view('cartshow', ['cart' => $cart, 'products' => $productMap]);
+
+        $cart = session()->get('cart');
+
+        // Jika keranjang kosong, tambahkan produk sebagai produk pertama
+        if(!$cart) {
+            $cart = [
+                $id_item => [
+                    "nama_item" => $product->nama_item,
+                    "quantity" => 1,
+                    "harga" => $product->harga,
+                    "gambar" => $product->gambar,
+                    "stok" => $product->stok
+                ]
+            ];
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'Added to cart successfully!');
+        }
+
+        // Jika produk sudah ada dalam keranjang, periksa apakah penambahan akan melebihi stok
+        if(isset($cart[$id_item])) {
+            $newQuantity = $cart[$id_item]['quantity'] + 1;
+
+            // Jika jumlah baru melebihi stok, tampilkan pesan error
+            if ($newQuantity > $product->stok) {
+                return redirect()->back()->with('error', 'Cannot add to cart. Stock quantity exceeded!');
+            }
+
+            $cart[$id_item]['quantity'] = $newQuantity;
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+
+        // Jika produk belum ada dalam keranjang
+        $cart[$id_item] = [
+            "nama_item" => $product->nama_item,
+            "quantity" => 1,
+            "harga" => $product->harga,
+            "gambar" => $product->gambar,
+            "stok" => $product->stok
+        ];
+
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
-    
+
+
+    // update product of choose in cart
+    public function update(Request $request)
+    {
+        if ($request->id_item && $request->quantity) {
+            $cart = session()->get('cart');
+
+            if (isset($cart[$request->id_item])) {
+                $cart[$request->id_item]["quantity"] = $request->quantity;
+                session()->put('cart', $cart);
+                session()->flash('success', 'Cart updated successfully');
+            }
+        }
+    }
+
+
+    public function remove(Request $request)
+    {
+        if ($request->id_item) {
+            $cart = session()->get('cart');
+
+            if (isset($cart[$request->id_item])) {
+                unset($cart[$request->id_item]);
+                session()->put('cart', $cart);
+                session()->flash('success', 'Product removed successfully');
+            }
+        }
+    }
+
+
 
 
 
