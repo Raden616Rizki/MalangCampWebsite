@@ -15,7 +15,6 @@
                     <th>Customer</th>
                     <th>Status Order</th>
                     <th>Total</th>
-                    <th>Detail</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -45,7 +44,6 @@
                             </select>
                         </td>
                         <td>Rp{{ $p->total }}</td>
-                        <td></td>
                         <td>
                             <button type="submit" class="btn btn-sm btn-danger" onclick="deletePesanan({{ $p->pesanan_id }})">Delete</button>
                         </td>
