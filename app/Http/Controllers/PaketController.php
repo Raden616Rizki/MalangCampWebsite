@@ -24,7 +24,7 @@ class PaketController extends Controller
             // $Pakets = Paket::orderBy('paket_id', 'desc')->paginate(2);
             $Pakets = Paket::where('nama_paket', 'LIKE', '%'.$key.'%')->paginate(2);
             return view('kelolaPaket', compact('Pakets'));
-        } else {
+        }else{
             // $mahasiswas = Mahasiswa::all(); // Mengambil semua isi tabel
             $Pakets = Paket::orderBy('paket_id', 'desc')->paginate(2);
             return view('kelolaPaket', compact('Pakets'));
