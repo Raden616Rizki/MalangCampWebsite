@@ -83,7 +83,7 @@
 
         $.ajax({
         type: 'DELETE',
-        url: `laporan/${pesanan_id}`,
+        url: `/laporan/${pesanan_id}`,
         data: {},
         success: function(response) {
         },

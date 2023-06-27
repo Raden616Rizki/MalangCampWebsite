@@ -133,5 +133,29 @@
             });
         }
     });
+
+//     $(document).ready(function() {
+//   // Mendapatkan elemen input tanggal pinjam dan tanggal kembali
+//   var tanggalPinjamInput = $("input[name='tanggal_pinjam']");
+//   var tanggalKembaliInput = $("input[name='tanggal_kembali']");
+
+//   // Mengatur tanggal kembali tidak dapat diisi
+//   tanggalKembaliInput.prop("disabled", true);
+
+//   // Menambahkan event listener pada input tanggal pinjam
+//   tanggalPinjamInput.on("change", function() {
+//     // Mendapatkan tanggal pinjam yang dipilih
+//     var tanggalPinjam = new Date($(this).val());
+
+//     // Menghitung tanggal kembali (7 hari setelah tanggal pinjam)
+//     var tanggalKembali = new Date(tanggalPinjam.getTime() + (7 * 24 * 60 * 60 * 1000));
+
+//     // Mengubah format tanggal kembali menjadi "yyyy-mm-dd"
+//     var formattedTanggalKembali = tanggalKembali.toISOString().split("T")[0];
+
+//     // Mengisi nilai tanggal kembali
+//     tanggalKembaliInput.val(formattedTanggalKembali);
+//   });
+// });
 </script>
 @endsection

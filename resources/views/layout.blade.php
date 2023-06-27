@@ -360,7 +360,7 @@
             font-family: 'Inter';
             font-style: normal;
             color: #000000;
-            
+
             padding-left: 3vh;
         }
 
@@ -455,7 +455,8 @@
         }
 
         .box-kelolaPesanan table tbody tr td{
-            padding-left: 2vh;
+            text-align: center;
+            padding-left: 5vh;
             margin-left: 3vh;
         }
 

@@ -111,6 +111,6 @@ class LaporanController extends Controller
     {
         Items_Pesanan::where('pesanan_id', $pesanan_id)->delete();
         KelolaPesanan::where('pesanan_id', $pesanan_id)->delete();
-        return redirect()->route('laporanTransaksi');
+        return response();
     }
 }

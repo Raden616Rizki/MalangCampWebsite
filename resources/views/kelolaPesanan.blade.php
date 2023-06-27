@@ -19,10 +19,11 @@
                     </tr>
                     @foreach($pesanan->kelolaBarangs as $item)
                         <tr>
-                            <td>{{ $item->nama_item }}</td>
-                            <td>{{--{{ $pesanan->jumlah_item}}--}}</td>
+                            <td>{{ $item->nama_item }} </td>
+                            <td>{{ $item->jenis}} </td>
                             <td>{{ $pesanan->tanggal_peminjaman}} - {{ $pesanan->tanggal_kembali}}</td>
-                            <td>{{ $item->harga}}</td>
+                            <td>{{ $item->harga}} </td>
+                            <td><img src="{{ $item->gambar}}" alt="" style="width:10vh; height:10vh;"></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -30,20 +31,21 @@
             <div class="kolom-bawah">
                 <div class="catatan" style="font-size:10px;font-family: 'Font Awesome 5 Brands';font-style: normal;color: #FFFFFF;margin-left:2vh; padding-top:1vh; list-style:none;">
                     <li>Catatan : {{$pesanan->catatan}}</li>
-                    <li>Total   : {{$pesanan->total}}</li>
+                    <li>Total   :  Rp {{$pesanan->total}}</li>
+                    <li>Bukti   : <img src="{{$pesanan->gambar}}" alt="belum melakukan pembayaran"></li>
                 </div>
                 <div class="tombol">
                     <form action="{{route('keranjang.update', $pesanan->pesanan_id)}}" method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="payment">
+                        {{-- <div class="payment">
                             <button class="pay" style="background: #FFFFFF;
                             border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
                             color: #000000; border:none; width:15vh;">payment</button>
-                        </div>
+                        </div> --}}
                         <select name="status_pembayaran" id="status_pembayaran" style="background: #FFFFFF;
                         border-radius: 18px; font-family: 'ABeeZee';font-style: normal;
-                        color: #000000; border:none; margin-left:1vh;">
+                        color: #000000; border:none; margin-left:1vh; height:4vh;">
                             <option value="belum bayar" {{ $pesanan->status_pembayaran == 'belum bayar' ? 'selected' : '' }}>Belum Bayar</option>
                             <option value="lunas" {{ $pesanan->status_pembayaran == 'lunas' ? 'selected' : '' }}>Lunas</option>
                             <option value="dp" {{ $pesanan->status_pembayaran == 'dp' ? 'selected' : '' }}>DP</option>

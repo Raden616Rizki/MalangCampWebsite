@@ -127,6 +127,10 @@ Route::resource('keranjang',PesananController::class);
 
 Route::resource('laporan',LaporanController::class);
 
+Route::get('laporan/{pesanan_id}', function () {
+    return view('');
+});
+
 
 
 
