@@ -6,102 +6,42 @@
 <div class="utama">
     <!-- <div class="box_kelola"> -->
     <div class="box_listTam">
-        <div>
-            <div>
-                <div class="pagination d-flex">
-                    <div class="tambahan">
-
-                    </div>
-                    <div class="box_panah d-flex">
-                        <!-- Tombol untuk halaman sebelumnya -->
-                        @if($kelolaBarang->currentPage() > 1)
-                        <a href="{{ $kelolaBarang->previousPageUrl() }}" style="color:black; font-size:20px;"><b>
-                                <</b> </a> <!-- <div class="text"> -->
-                                    <h4 class="list"> <b> List Barang </b> </h4>
-                                    <!-- </div> -->
-                                    <a href="{{ $kelolaBarang->nextPageUrl() }}"
-                                        style="color:black; font-size:20px;"><b>></b></a>
-                                    @endif
-
-                                    <!-- Tombol untuk halaman berikutnya -->
-                                    @if($kelolaBarang->hasMorePages())
-                                    <a href="{{ $kelolaBarang->previousPageUrl() }}"
-                                        style="color:black; font-size:20px;"><b>
-                                            <</b> </a> <!-- <div class="text"> -->
-                                                <h4 class="list"> <b> List Barang </b> </h4>
-                                                <!-- </div> -->
-
-                                                <a href="{{ $kelolaBarang->nextPageUrl() }}"
-                                                    style="color:black; font-size:20px;"><b>></b></a>
-                                                @endif
-
+            <div class="box-item" style="display: grid;
+            grid-template-columns: repeat(3, 1fr);">
+                @foreach($products as $product)
+                <div class="card" style="width: 18rem; background: rgba(255, 255, 255, 0.5);
+                box-shadow: 6px 0px 10px rgba(0, 0, 0, 0.25);
+                border-radius: 30px;">
+                    <img class="card-img-top" src="{{ asset('storage/static/image_item/'.$product->gambar) }}" alt="Card image cap" style="width: 15vh; height:15vh; margin-left:33%;">
+                    {{-- {{dd(asset($product->gambar))}} --}}
+                    <div class="card-body">
+                        <ul style="list-style: none; text-align:center;">
+                            <li><h4>{{ $product->nama_item }}</h4></li>
+                            <li>{{ $product->harga }}</li>
+                            <li>
+                                <p class="btn-holder">
+                                    <a href="{{ url('add-to-cart/'.$product->id_item) }}" class="btn btn-secondary btn-sm" role="button">Add to cart</a>
+                                </p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div>
-                    <div class="tenda d-flex">
-                        @foreach ($kelolaBarang as $barang)
-                        <div class="box_kelola">
-                            <div class="nama">
-                                <img src="{{ asset('storage/static/image/'.$barang->gambar) }}" class="box_foto" alt="">
-                                <!-- <div>
-                                            <label for="item_id">ID Item</label>
-                                            <div class="box_isi">
-                                                <div class="isi"> 
-                                                    {{$barang->id_item}}
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                <div>
-                                    <label for="nama_item">Nama Item</label>
-                                    <div class="box_isi">
-                                        <div class="isi">
-                                            {{$barang->nama_item}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="stok">Stok</label>
-                                    <div class="box_isi">
-                                        <div class="isi">
-                                            {{$barang->stok}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- <div>
-                                            <label for="jenis">Jenis</label>
-                                            <div class="box_isi">
-                                                <div class="isi"> 
-                                                    {{$barang->jenis}}
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                <!-- <div>
-                                            <label for="keterangan">Keterangan</label>
-                                            <div class="box_isi">
-                                                <div class="isi"> 
-                                                    {{$barang->keterangan}}
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                <div>
-                                    <label for="harga">Harga</label>
-                                    <div class="box_isi">
-                                        <div class="isi">
-                                            {{$barang->harga}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hapus_edit d-flex">
-                                    <button type="submit" class="box_add">Pesan</button>
-                                    <button type="submit" class="box_add">Add To Chart</button>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
+                @endforeach
+                <div class="text-center">
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $products->previousPageUrl() }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                            {{ $products->links("pagination::bootstrap-4") }}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $products->nextPageUrl() }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-        </div>
     </div>
 </div>
 <!-- </div> -->

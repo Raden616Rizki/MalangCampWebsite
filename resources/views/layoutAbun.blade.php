@@ -345,7 +345,7 @@
         }
 
         // Countdown Variabel
-        let count = 60;
+        let count = 240;
 
         function updateCountdown() {
             // console.log(count);

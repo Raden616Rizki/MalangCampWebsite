@@ -53,4 +53,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'otp_expired' => 'datetime',
     ];
+
+    public function chat() {
+        return $this->hasMany(Chat::class);
+    }
 }
