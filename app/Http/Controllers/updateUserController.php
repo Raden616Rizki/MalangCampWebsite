@@ -41,7 +41,7 @@ class updateUserController extends Controller
             Storage::delete('public/'.$user->photo_profile);
         }
 
-        $filename = $request->file('photo_profile')->store('static/photo_profile/', 'public');
+        $filename = $request->file('photo_profile')->store('static/photo_profile', 'public');
         $user->photo_profile = $filename;
 
         $user->save();

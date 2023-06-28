@@ -63,7 +63,7 @@
         @endforeach
 
         <a type="button" class="btn btn-light" style="margin-left:240px;" href="{{ route('paket.create') }}">Tambah</a>
-        <a class="btn btn-light" style="margin-left:5px;"
+        <a target="_blank" class="btn btn-light" style="margin-left:5px;"
                                 href="{{ route('cetak_laporanPaket') }}">Cetak</a>
     </div>
 </div>

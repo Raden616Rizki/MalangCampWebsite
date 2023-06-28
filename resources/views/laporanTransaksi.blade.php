@@ -1,7 +1,11 @@
 @extends('layout')
 
 @section('title', 'Laporan Transaksi')
-
+@if (Auth::user()->id > 1)
+    <script>
+        window.location.href = "/"
+    </script>
+@endif
 @section('search')
 <form action="laporanTransaksi" method="GET" id="search-form">
     <input class="main shadow" id="search-input" name="search-input" value="{{request('search-input')}}" placeholder="Search" /><span class="searchicon"></span>

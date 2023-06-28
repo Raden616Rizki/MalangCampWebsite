@@ -25,7 +25,7 @@ class LaporanController extends Controller
             ->paginate(4);
             return view('laporanTransaksi', compact('pesanan'));
         } else {
-            $pesanan = KelolaPesanan::orderBy('pesanan', 'desc')->paginate(4);
+            $pesanan = KelolaPesanan::orderBy('pesanan_id', 'desc')->paginate(4);
             return view('laporanTransaksi', compact('pesanan'));
 
         }
@@ -69,10 +69,11 @@ class LaporanController extends Controller
             ->paginate(4);
             return view('laporanTransaksi', compact('pesanan'));
         } else {
-            $pesanan = KelolaPesanan::orderBy('pesanan', 'desc')->paginate(4);
+            $pesanan = KelolaPesanan::orderBy('pesanan_id', 'desc')->paginate(4);
             return view('laporanTransaksi', compact('pesanan'));
 
         }
+        // return view('laporanTransaksi', compact('pesanan'));
     }
 
     /**

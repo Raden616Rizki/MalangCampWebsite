@@ -2,6 +2,11 @@
 @section('title', 'Kelola Pesanan')
 
 @section('content')
+@if (Auth::user()->id > 1)
+    <script>
+        window.location.href = "/"
+    </script>
+@endif
     <div class="box-pesanan" style="padding-top: 3vh;">
         <center style="font-family: 'ABeeZee'; font-style: normal;font-weight: 400;font-size: 22px;line-height: 26px;color: #000000;">
             Kelola Pesanan

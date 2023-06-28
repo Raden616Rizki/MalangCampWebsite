@@ -6,6 +6,7 @@ use App\Models\Paket;
 use App\Models\laporanPaket_pdf;
 use App\Models\KelolaBarang;
 use App\Http\Controllers\Controller;
+use App\Models\kelolaBarangs;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\Storage;
@@ -38,7 +39,7 @@ class PaketController extends Controller
      */
     public function create()
     {
-        $item = KelolaBarang::all();
+        $item = kelolaBarangs::all();
         // dd($item);
         return view('tambahPaket', compact('item'));
     }
@@ -100,7 +101,7 @@ class PaketController extends Controller
      */
     public function edit($paket_id)
     {
-        $item = KelolaBarang::all();
+        $item = kelolaBarangs::all();
         $Paket = Paket::find($paket_id);
         $selectedItems = $Paket->kelola_barangs->pluck('id_item')->toArray();
         return view('updatePaket', compact('Paket', 'item', 'selectedItems'));
